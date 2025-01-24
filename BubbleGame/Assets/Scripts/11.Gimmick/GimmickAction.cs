@@ -10,6 +10,6 @@ namespace Gimmick
         public StatusValue<int> loopCount = new(0, 0, 1);
         public StatusValue<float> rateTimer = new();
         public UnityEvent action;
-        public UnityEvent delayEvent;
+        public UnityEvent delay;
     }
 }

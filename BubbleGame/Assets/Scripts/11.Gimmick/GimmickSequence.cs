@@ -1,14 +1,16 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Gimmick
 {
     public class GimmickSequence : MonoBehaviour
     {
-        public GimmickAction[] gimmick;
+        public GimmickAction[] gimmicks;
 
         private Animator animator;
         
@@ -19,10 +21,18 @@ namespace Gimmick
 
         public void Awake()
         {
-            _currentGimmickEnumerator = gimmick.GetEnumerator();
-            _currentGimmick = _currentGimmickEnumerator.Current as GimmickAction;
+            _currentGimmickEnumerator = gimmicks.GetEnumerator();
+            if(_currentGimmickEnumerator.MoveNext())
+                _currentGimmick = _currentGimmickEnumerator.Current as GimmickAction;
+            else
+                isSequenceStop = true;
 
             animator = GetComponent<Animator>();
+            
+            foreach (var gimmick in gimmicks)
+            {
+                gimmick.rateTimer.SetMax();
+            }
         }
 
         public void Update()
@@ -33,6 +43,7 @@ namespace Gimmick
             if (_currentGimmick.rateTimer.IsMin)
             {
                 _currentGimmick.action.Invoke();
+                _currentGimmick.delay.Invoke();
                 _currentGimmick.rateTimer.SetMax();
                 _currentGimmick.loopCount.Current++;
                 if (!_currentGimmick.isLoop && _currentGimmick.loopCount.IsMax)
