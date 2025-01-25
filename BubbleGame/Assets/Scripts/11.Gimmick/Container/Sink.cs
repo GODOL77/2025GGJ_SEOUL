@@ -47,7 +47,7 @@ namespace Gimmick.Container
 
             faucetRotateCount.Current++;
             if (faucetRotateTween != null) faucetRotateTween.Pause();
-            faucetRotateTween = faucetObject.transform.DORotate(new Vector3(0, 0, (360f / faucetRotateCount.Max) * faucetRotateCount.Current), 0.4f);
+            faucetRotateTween = faucetObject.transform.DOLocalRotate(new Vector3(0, 0, (360f / faucetRotateCount.Max) * faucetRotateCount.Current), 0.4f);
             
             if (faucetRotateCount.IsMax)
             {
@@ -89,7 +89,14 @@ namespace Gimmick.Container
             if (context.performed)
             {
                 if (isFaucetOn) Init();
-                else faucetRotateCount.Current--;
+                else 
+                {
+                    faucetRotateCount.Current--;
+                    if (faucetRotateTween != null) faucetRotateTween.Pause();
+                    faucetRotateTween = faucetObject.transform.DOLocalRotate(new Vector3(0, 0, (360f / faucetRotateCount.Max) * faucetRotateCount.Current), 0.4f);
+                    
+                    if (faucetRotateCount.IsMin) gimmickMaterialControl.RemoveMaterial();
+                }
             }
         }
     }
