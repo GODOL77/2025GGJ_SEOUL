@@ -919,12 +919,12 @@ PrefabInstance:
     - target: {fileID: 4282176690060296503, guid: 10af09c7e4859ae4c8f5a34537897c08,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.91982156
+      value: 0.5090421
       objectReference: {fileID: 0}
     - target: {fileID: 4282176690060296503, guid: 10af09c7e4859ae4c8f5a34537897c08,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.3923369
+      value: 0.8607416
       objectReference: {fileID: 0}
     - target: {fileID: 5201641897396568745, guid: 10af09c7e4859ae4c8f5a34537897c08,
         type: 3}
@@ -939,7 +939,7 @@ PrefabInstance:
     - target: {fileID: 8847371057183425510, guid: 10af09c7e4859ae4c8f5a34537897c08,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.042908244
+      value: -0.06465757
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1405,196 +1405,30 @@ Transform:
   m_Children: []
   m_Father: {fileID: 642761087}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &510349640
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 510349641}
-  - component: {fileID: 510349643}
-  - component: {fileID: 510349642}
-  m_Layer: 0
-  m_Name: Plate Drop (1)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &510349641
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 510349640}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 2085913896}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &510349642
+--- !u!114 &510349642 stripped
 MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 3402327729777169609, guid: 0fdc01f0dd8b71b459e89a1119756f4f,
+    type: 3}
+  m_PrefabInstance: {fileID: 3223667914468925102}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 510349640}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 544510ab89ad85d49a528492487183bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetObjects:
-  - {fileID: 58900722}
-  material: {fileID: 2100000, guid: 00a094835a6962147bf0bc537fded43e, type: 2}
---- !u!114 &510349643
+--- !u!114 &510349643 stripped
 MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 5685021446820836341, guid: 0fdc01f0dd8b71b459e89a1119756f4f,
+    type: 3}
+  m_PrefabInstance: {fileID: 3223667914468925102}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 510349640}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0f1584f4c51e1e34b80fcb36fd86d857, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isOnAwake: 1
-  isLoop: 1
-  delayTimer:
-    _min: 0
-    _max: 17
-    _current: 0
-    _isMin: 1
-    _isMax: 1
-    isOverMax: 0
-    isOverMin: 0
-  isSequenceStop: 0
-  gimmicks:
-  - isLoop: 0
-    loopCount:
-      _min: 0
-      _max: 1
-      _current: 0
-      _isMin: 0
-      _isMax: 0
-      isOverMax: 0
-      isOverMin: 0
-    rateTimer:
-      _min: 0
-      _max: 0
-      _current: 0
-      _isMin: 0
-      _isMax: 0
-      isOverMax: 0
-      isOverMin: 0
-    action:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 58900725}
-          m_TargetAssemblyTypeName: bowl, Assembly-CSharp
-          m_MethodName: Shake_bowl
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-    delay:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 58900725}
-          m_TargetAssemblyTypeName: bowl, Assembly-CSharp
-          m_MethodName: Delay
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  - isLoop: 0
-    loopCount:
-      _min: 0
-      _max: 1
-      _current: 0
-      _isMin: 0
-      _isMax: 0
-      isOverMax: 0
-      isOverMin: 0
-    rateTimer:
-      _min: 0
-      _max: 0
-      _current: 0
-      _isMin: 0
-      _isMax: 0
-      isOverMax: 0
-      isOverMin: 0
-    action:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 58900726}
-          m_TargetAssemblyTypeName: PlateDropGimmick, Assembly-CSharp
-          m_MethodName: Play
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-    delay:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 58900726}
-          m_TargetAssemblyTypeName: PlateDropGimmick, Assembly-CSharp
-          m_MethodName: Delay
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  _currentGimmick:
-    isLoop: 0
-    loopCount:
-      _min: 0
-      _max: 1
-      _current: 0
-      _isMin: 1
-      _isMax: 0
-      isOverMax: 0
-      isOverMin: 0
-    rateTimer:
-      _min: 0
-      _max: 0
-      _current: 0
-      _isMin: 1
-      _isMax: 1
-      isOverMax: 0
-      isOverMin: 0
-    action:
-      m_PersistentCalls:
-        m_Calls: []
-    delay:
-      m_PersistentCalls:
-        m_Calls: []
 --- !u!1 &642761086
 GameObject:
   m_ObjectHideFlags: 0
@@ -1842,196 +1676,30 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1813445027}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1031618562
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1031618563}
-  - component: {fileID: 1031618565}
-  - component: {fileID: 1031618564}
-  m_Layer: 0
-  m_Name: Plate Drop (2)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1031618563
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1031618562}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 2085913896}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1031618564
+--- !u!114 &1031618564 stripped
 MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 3412115517891549977, guid: 0fdc01f0dd8b71b459e89a1119756f4f,
+    type: 3}
+  m_PrefabInstance: {fileID: 3223667914468925102}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1031618562}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 544510ab89ad85d49a528492487183bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetObjects:
-  - {fileID: 884127282}
-  material: {fileID: 2100000, guid: 00a094835a6962147bf0bc537fded43e, type: 2}
---- !u!114 &1031618565
+--- !u!114 &1031618565 stripped
 MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 7253876337667225205, guid: 0fdc01f0dd8b71b459e89a1119756f4f,
+    type: 3}
+  m_PrefabInstance: {fileID: 3223667914468925102}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1031618562}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0f1584f4c51e1e34b80fcb36fd86d857, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isOnAwake: 1
-  isLoop: 1
-  delayTimer:
-    _min: 0
-    _max: 12
-    _current: 0
-    _isMin: 1
-    _isMax: 1
-    isOverMax: 0
-    isOverMin: 0
-  isSequenceStop: 0
-  gimmicks:
-  - isLoop: 0
-    loopCount:
-      _min: 0
-      _max: 1
-      _current: 0
-      _isMin: 0
-      _isMax: 0
-      isOverMax: 0
-      isOverMin: 0
-    rateTimer:
-      _min: 0
-      _max: 0
-      _current: 0
-      _isMin: 0
-      _isMax: 0
-      isOverMax: 0
-      isOverMin: 0
-    action:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 884127284}
-          m_TargetAssemblyTypeName: bowl, Assembly-CSharp
-          m_MethodName: Shake_bowl
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-    delay:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 884127284}
-          m_TargetAssemblyTypeName: bowl, Assembly-CSharp
-          m_MethodName: Delay
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  - isLoop: 0
-    loopCount:
-      _min: 0
-      _max: 1
-      _current: 0
-      _isMin: 0
-      _isMax: 0
-      isOverMax: 0
-      isOverMin: 0
-    rateTimer:
-      _min: 0
-      _max: 0
-      _current: 0
-      _isMin: 0
-      _isMax: 0
-      isOverMax: 0
-      isOverMin: 0
-    action:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 884127285}
-          m_TargetAssemblyTypeName: PlateDropGimmick, Assembly-CSharp
-          m_MethodName: Play
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-    delay:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 884127285}
-          m_TargetAssemblyTypeName: PlateDropGimmick, Assembly-CSharp
-          m_MethodName: Delay
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  _currentGimmick:
-    isLoop: 0
-    loopCount:
-      _min: 0
-      _max: 1
-      _current: 0
-      _isMin: 1
-      _isMax: 0
-      isOverMax: 0
-      isOverMin: 0
-    rateTimer:
-      _min: 0
-      _max: 0
-      _current: 0
-      _isMin: 1
-      _isMax: 1
-      isOverMax: 0
-      isOverMin: 0
-    action:
-      m_PersistentCalls:
-        m_Calls: []
-    delay:
-      m_PersistentCalls:
-        m_Calls: []
 --- !u!1 &1074143463
 GameObject:
   m_ObjectHideFlags: 0
@@ -2076,7 +1744,7 @@ GameObject:
   - component: {fileID: 1175485559}
   - component: {fileID: 1175485558}
   - component: {fileID: 1175485557}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2529,7 +2197,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 3223667914468925102}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3223667914468925103}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 544510ab89ad85d49a528492487183bf, type: 3}
@@ -2541,7 +2209,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 3223667914468925102}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3223667914468925103}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0f1584f4c51e1e34b80fcb36fd86d857, type: 3}
@@ -2817,12 +2485,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!4 &2085913896 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 3045803260029490672, guid: 0fdc01f0dd8b71b459e89a1119756f4f,
-    type: 3}
-  m_PrefabInstance: {fileID: 3223667914468925102}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &18793070819011730
 GameObject:
   m_ObjectHideFlags: 0
@@ -3958,11 +3620,6 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 393624991435279985, guid: 0fdc01f0dd8b71b459e89a1119756f4f,
         type: 3}
-      propertyPath: delayTimer._max
-      value: 30
-      objectReference: {fileID: 0}
-    - target: {fileID: 393624991435279985, guid: 0fdc01f0dd8b71b459e89a1119756f4f,
-        type: 3}
       propertyPath: _currentGimmick.action.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1813445033}
@@ -3993,11 +3650,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2824477419556325802, guid: 0fdc01f0dd8b71b459e89a1119756f4f,
         type: 3}
-      propertyPath: delayTimer._max
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 2824477419556325802, guid: 0fdc01f0dd8b71b459e89a1119756f4f,
-        type: 3}
       propertyPath: gimmicks.Array.data[0].delay.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 870605862}
@@ -4021,51 +3673,21 @@ PrefabInstance:
       propertyPath: targetObjects.Array.data[0]
       value: 
       objectReference: {fileID: 49119693275013524}
+    - target: {fileID: 3402327729777169609, guid: 0fdc01f0dd8b71b459e89a1119756f4f,
+        type: 3}
+      propertyPath: targetObjects.Array.data[0]
+      value: 
+      objectReference: {fileID: 58900722}
+    - target: {fileID: 3412115517891549977, guid: 0fdc01f0dd8b71b459e89a1119756f4f,
+        type: 3}
+      propertyPath: targetObjects.Array.data[0]
+      value: 
+      objectReference: {fileID: 884127282}
     - target: {fileID: 3928729859418307195, guid: 0fdc01f0dd8b71b459e89a1119756f4f,
         type: 3}
       propertyPath: targetObjects.Array.data[0]
       value: 
       objectReference: {fileID: 870605859}
-    - target: {fileID: 4114511940292266034, guid: 0fdc01f0dd8b71b459e89a1119756f4f,
-        type: 3}
-      propertyPath: delayTimer._max
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 4114511940292266034, guid: 0fdc01f0dd8b71b459e89a1119756f4f,
-        type: 3}
-      propertyPath: gimmicks.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4114511940292266034, guid: 0fdc01f0dd8b71b459e89a1119756f4f,
-        type: 3}
-      propertyPath: gimmicks.Array.data[0].loopCount._max
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4114511940292266034, guid: 0fdc01f0dd8b71b459e89a1119756f4f,
-        type: 3}
-      propertyPath: gimmicks.Array.data[0].rateTimer._max
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4114511940292266034, guid: 0fdc01f0dd8b71b459e89a1119756f4f,
-        type: 3}
-      propertyPath: gimmicks.Array.data[0].delay.m_PersistentCalls.m_Calls.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4114511940292266034, guid: 0fdc01f0dd8b71b459e89a1119756f4f,
-        type: 3}
-      propertyPath: gimmicks.Array.data[0].action.m_PersistentCalls.m_Calls.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4114511940292266034, guid: 0fdc01f0dd8b71b459e89a1119756f4f,
-        type: 3}
-      propertyPath: gimmicks.Array.data[0].delay.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4114511940292266034, guid: 0fdc01f0dd8b71b459e89a1119756f4f,
-        type: 3}
-      propertyPath: gimmicks.Array.data[0].action.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4114511940292266034, guid: 0fdc01f0dd8b71b459e89a1119756f4f,
         type: 3}
       propertyPath: gimmicks.Array.data[0].delay.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -4076,46 +3698,6 @@ PrefabInstance:
       propertyPath: gimmicks.Array.data[0].action.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 290113084}
-    - target: {fileID: 4114511940292266034, guid: 0fdc01f0dd8b71b459e89a1119756f4f,
-        type: 3}
-      propertyPath: gimmicks.Array.data[0].delay.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4114511940292266034, guid: 0fdc01f0dd8b71b459e89a1119756f4f,
-        type: 3}
-      propertyPath: gimmicks.Array.data[0].action.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4114511940292266034, guid: 0fdc01f0dd8b71b459e89a1119756f4f,
-        type: 3}
-      propertyPath: gimmicks.Array.data[0].delay.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: GimmickDelay
-      objectReference: {fileID: 0}
-    - target: {fileID: 4114511940292266034, guid: 0fdc01f0dd8b71b459e89a1119756f4f,
-        type: 3}
-      propertyPath: gimmicks.Array.data[0].action.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: Play
-      objectReference: {fileID: 0}
-    - target: {fileID: 4114511940292266034, guid: 0fdc01f0dd8b71b459e89a1119756f4f,
-        type: 3}
-      propertyPath: gimmicks.Array.data[0].delay.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: Gimmick.Container.Sink, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 4114511940292266034, guid: 0fdc01f0dd8b71b459e89a1119756f4f,
-        type: 3}
-      propertyPath: gimmicks.Array.data[0].action.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: Gimmick.Container.Sink, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 4114511940292266034, guid: 0fdc01f0dd8b71b459e89a1119756f4f,
-        type: 3}
-      propertyPath: gimmicks.Array.data[0].delay.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 4114511940292266034, guid: 0fdc01f0dd8b71b459e89a1119756f4f,
-        type: 3}
-      propertyPath: gimmicks.Array.data[0].action.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
     - target: {fileID: 5254266481680625340, guid: 0fdc01f0dd8b71b459e89a1119756f4f,
         type: 3}
       propertyPath: targetObjects.Array.data[0]
@@ -4171,16 +3753,31 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5685021446820836341, guid: 0fdc01f0dd8b71b459e89a1119756f4f,
+        type: 3}
+      propertyPath: gimmicks.Array.data[0].delay.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 58900725}
+    - target: {fileID: 5685021446820836341, guid: 0fdc01f0dd8b71b459e89a1119756f4f,
+        type: 3}
+      propertyPath: gimmicks.Array.data[1].delay.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 58900726}
+    - target: {fileID: 5685021446820836341, guid: 0fdc01f0dd8b71b459e89a1119756f4f,
+        type: 3}
+      propertyPath: gimmicks.Array.data[0].action.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 58900725}
+    - target: {fileID: 5685021446820836341, guid: 0fdc01f0dd8b71b459e89a1119756f4f,
+        type: 3}
+      propertyPath: gimmicks.Array.data[1].action.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 58900726}
     - target: {fileID: 5837348847623311502, guid: 0fdc01f0dd8b71b459e89a1119756f4f,
         type: 3}
       propertyPath: targetObjects.Array.data[0]
       value: 
       objectReference: {fileID: 946293613}
-    - target: {fileID: 6850677226522157076, guid: 0fdc01f0dd8b71b459e89a1119756f4f,
-        type: 3}
-      propertyPath: targetObjects.Array.size
-      value: 3
-      objectReference: {fileID: 0}
     - target: {fileID: 6850677226522157076, guid: 0fdc01f0dd8b71b459e89a1119756f4f,
         type: 3}
       propertyPath: targetObjects.Array.data[0]
@@ -4196,26 +3793,26 @@ PrefabInstance:
       propertyPath: targetObjects.Array.data[2]
       value: 
       objectReference: {fileID: 290113081}
-    - target: {fileID: 6850677226522157076, guid: 0fdc01f0dd8b71b459e89a1119756f4f,
+    - target: {fileID: 7253876337667225205, guid: 0fdc01f0dd8b71b459e89a1119756f4f,
         type: 3}
-      propertyPath: targetObjects.Array.data[3]
+      propertyPath: gimmicks.Array.data[0].delay.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 290113081}
-    - target: {fileID: 6850677226522157076, guid: 0fdc01f0dd8b71b459e89a1119756f4f,
+      objectReference: {fileID: 884127284}
+    - target: {fileID: 7253876337667225205, guid: 0fdc01f0dd8b71b459e89a1119756f4f,
         type: 3}
-      propertyPath: targetObjects.Array.data[4]
+      propertyPath: gimmicks.Array.data[1].delay.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 290113081}
-    - target: {fileID: 6850677226522157076, guid: 0fdc01f0dd8b71b459e89a1119756f4f,
+      objectReference: {fileID: 884127285}
+    - target: {fileID: 7253876337667225205, guid: 0fdc01f0dd8b71b459e89a1119756f4f,
         type: 3}
-      propertyPath: targetObjects.Array.data[5]
+      propertyPath: gimmicks.Array.data[0].action.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 290113081}
-    - target: {fileID: 6850677226522157076, guid: 0fdc01f0dd8b71b459e89a1119756f4f,
+      objectReference: {fileID: 884127284}
+    - target: {fileID: 7253876337667225205, guid: 0fdc01f0dd8b71b459e89a1119756f4f,
         type: 3}
-      propertyPath: targetObjects.Array.data[6]
+      propertyPath: gimmicks.Array.data[1].action.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 3223667914468925103}
+      objectReference: {fileID: 884127285}
     - target: {fileID: 8785818268180498473, guid: 0fdc01f0dd8b71b459e89a1119756f4f,
         type: 3}
       propertyPath: gimmicks.Array.data[0].action.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -4248,23 +3845,9 @@ PrefabInstance:
       objectReference: {fileID: 9005626740916489135}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: 3045803260029490672, guid: 0fdc01f0dd8b71b459e89a1119756f4f,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 510349641}
-    - targetCorrespondingSourceObject: {fileID: 3045803260029490672, guid: 0fdc01f0dd8b71b459e89a1119756f4f,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1031618563}
+    m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0fdc01f0dd8b71b459e89a1119756f4f, type: 3}
---- !u!1 &3223667914468925103 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3477001956113166807, guid: 0fdc01f0dd8b71b459e89a1119756f4f,
-    type: 3}
-  m_PrefabInstance: {fileID: 3223667914468925102}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &3414362593678754780
 Transform:
   m_ObjectHideFlags: 0
@@ -5201,6 +4784,7 @@ MonoBehaviour:
   shatterYForce: 3
   gimmickSequence: {fileID: 0}
   gimmickMaterialControl: {fileID: 41910432}
+  shatterSound: {fileID: 0}
 --- !u!23 &5165624132710415695
 MeshRenderer:
   m_ObjectHideFlags: 0
