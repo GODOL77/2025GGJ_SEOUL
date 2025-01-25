@@ -2803,7 +2803,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e52f77bd04daddf4e85b046995036cc1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scoreText: {fileID: 0}
+  scoreText: {fileID: 1935980670}
   scoreIncrement: 5
 --- !u!114 &1935980670 stripped
 MonoBehaviour:
