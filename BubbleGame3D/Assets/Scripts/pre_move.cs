@@ -22,6 +22,7 @@ public class pre_move : MonoBehaviour
     public Rigidbody right_rb;
     public Rigidbody down_rb;
     public GameObject Bubble;
+    public ParticleSystem dieParticle;
 
     private bool canJump = false; // 점프 가능 상태
     private bool right = true;
@@ -108,6 +109,16 @@ public class pre_move : MonoBehaviour
 
 private void OnTriggerEnter(Collider collision)
 {
+    if ((LayerMask.GetMask("Bubble Attacker") & (1 << collision.gameObject.layer)) != 0)
+    {
+        dieParticle.gameObject.SetActive(true);
+        dieParticle.transform.position = transform.position;
+        dieParticle.Play();
+        Destroy(gameObject);
+        Debug.Log("버블 사망");
+        return;
+    }
+    
     if (collision.gameObject.CompareTag("Plane") && !isGrounded)
     {
         isGrounded = true; // 바닥에 닿음
