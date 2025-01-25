@@ -16,6 +16,7 @@ public class pre_move : MonoBehaviour
     public Rigidbody left_rb;
     public Rigidbody right_rb;
     public Rigidbody down_rb;
+    public GameObject Bubble;
 
     private bool canJump = false; // 점프 가능 상태
     private Coroutine jumpCoroutine;
@@ -27,7 +28,6 @@ public class pre_move : MonoBehaviour
         {
             Debug.Log("rb is null");
         }
-
     }
 
 
@@ -71,18 +71,35 @@ public class pre_move : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter(Collision collision)
+private bool isGrounded = false; // 바닥에 닿았는지 여부
+
+private void OnTriggerEnter(Collider collision)
+{
+    if (collision.gameObject.CompareTag("Plane") && !isGrounded)
     {
-        if (collision.gameObject.CompareTag("Plane"))
+        isGrounded = true; // 바닥에 닿음
+        Debug.Log("닿았음");
+
+        if (jumpCoroutine != null)
         {
-            Debug.Log("닿았음");
-            if (jumpCoroutine != null)
-            {
-                StopCoroutine(jumpCoroutine);
-            }
-            jumpCoroutine = StartCoroutine(EnableJumpForLimitedTime());
+            StopCoroutine(jumpCoroutine);
         }
+        jumpCoroutine = StartCoroutine(EnableJumpForLimitedTime());
     }
+
+    if (collision.gameObject.CompareTag("Wall"))
+    {
+        Debug.Log("벽 닿았음");
+    }
+}
+
+private void OnTriggerExit(Collider collision)
+{
+    if (collision.gameObject.CompareTag("Plane"))
+    {
+        isGrounded = false; // 바닥에서 벗어남
+    }
+}
 
     private IEnumerator EnableJumpForLimitedTime()
     {
