@@ -1,21 +1,26 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using DG.Tweening;
+using GamePlay;
 using Gimmick;
-public class bowl : MonoBehaviour
+using UnityEngine.InputSystem;
+
+public class bowl : MonoBehaviour, IInteract
 {
     // Start is called before the first frame update
 
     public GameObject bowls;
-
-    public Vector3 Base_Pos;
-
+    public float intervalCount = 2;
+    public float delayDuration = 1f;
+    public float speed = 0.6f;
+    
     public GimmickSequence gimmickSequence;
 
-    Sequence BowlSeq;
+    private Sequence downSequence;
+    private Collider _collider;
+    private Vector3 originPosition;
+    private Vector3 originAngle;
     private bool isShakeEnd;
     public bool IsShakeEnd
     {
@@ -23,38 +28,41 @@ public class bowl : MonoBehaviour
         private set => isShakeEnd = value;
     }
 
+    public void Awake()
+    {
+        _collider = GetComponent<Collider>();
+        originPosition = gameObject.transform.localPosition;
+        originAngle = gameObject.transform.localEulerAngles;
+        IsShakeEnd = false;
+    }
+
     public void Init_bowl()
     {
-        BowlSeq.Kill();
+        downSequence.Kill();
         IsShakeEnd = false;
-        Debug.Log(Base_Pos);
-        gameObject.transform.localPosition = Base_Pos; 
-        gameObject.transform.localRotation = Quaternion.Euler(0, 0, -4);
+        gameObject.transform.localPosition = originPosition;
+        gameObject.transform.localEulerAngles = originAngle;
     }
 
     public void Shake_bowl()
     {
-        BowlSeq = DOTween.Sequence();
-        BowlSeq.Append(bowls.transform.DORotate(new Vector3(0, 0, 8), 1f).SetRelative(true).SetLoops(2, LoopType.Yoyo).SetEase(Ease.OutQuad));
-        BowlSeq.Join(bowls.transform.DOMoveZ(-0.01f, 1f).SetRelative(true).SetLoops(2, LoopType.Incremental).SetEase(Ease.OutQuad));
+        var BowlSeq = DOTween.Sequence();
+        for (int i = 0; i < intervalCount; i++)
+        {
+            BowlSeq.Append(transform.DOLocalRotate(new Vector3(0, 0, 8), speed).SetRelative(true).SetLoops(2, LoopType.Yoyo).SetEase(Ease.OutQuad).SetDelay(delayDuration));
+            BowlSeq.Join(transform.DOLocalMoveZ(0.01f, speed + 0.3f).SetRelative(true).SetLoops(2, LoopType.Incremental).SetEase(Ease.OutQuad).SetDelay(delayDuration));
+        }
 
-        BowlSeq.Append(transform.DOLocalRotate(new Vector3(0, 0, 8), 0.8f).SetRelative(true).SetLoops(2, LoopType.Yoyo).SetEase(Ease.OutQuad).SetDelay(2f));
-        BowlSeq.Join(transform.DOLocalMoveZ(0.01f, 1f).SetRelative(true).SetLoops(2, LoopType.Incremental).SetEase(Ease.OutQuad).SetDelay(2f));
+        BowlSeq.OnComplete(() =>
+        {
+            downSequence = DOTween.Sequence();
+            IsShakeEnd = true;
+            downSequence.Append(transform.DOLocalRotate(new Vector3(80, 0, 0), 0.6f).SetRelative(true).SetEase(Ease.OutQuad));
+            downSequence.Join(transform.DOLocalMoveZ(0.05f, 0.6f).SetRelative(true).SetEase(Ease.OutQuad));
+            downSequence.Join(transform.DOLocalMoveY(-1f, 1f).SetRelative(true).SetEase(Ease.InQuad));
 
-        BowlSeq.Append(transform.DOLocalRotate(new Vector3(0, 0, 8), 0.6f).SetRelative(true).SetLoops(2, LoopType.Yoyo).SetEase(Ease.OutQuad).SetDelay(3.6f));
-        BowlSeq.Join(transform.DOLocalMoveZ(0.01f, 1f).SetRelative(true).SetLoops(2, LoopType.Incremental).SetEase(Ease.OutQuad).SetDelay(4f));
-
-        BowlSeq.Append(transform.DOLocalRotate(new Vector3(0, 0, 8), 0.4f).SetRelative(true).SetLoops(2, LoopType.Yoyo).SetEase(Ease.OutQuad).SetDelay(4.8f));
-        BowlSeq.Join(transform.DOLocalMoveZ(0.01f, 1f).SetRelative(true).SetLoops(2, LoopType.Incremental).SetEase(Ease.OutQuad).SetDelay(4.8f));
-
-        BowlSeq.Append(transform.DOLocalRotate(new Vector3(0, 0, 8), 0.3f).SetRelative(true).SetLoops(6, LoopType.Yoyo).SetEase(Ease.OutQuad).SetDelay(5.6f));
-        BowlSeq.Join(transform.DOLocalMoveZ(0.01f, 1f).SetRelative(true).SetLoops(2, LoopType.Incremental).SetEase(Ease.OutQuad).SetDelay(5.6f));
-
-        BowlSeq.Append(transform.DOLocalRotate(new Vector3(80, 0, 0), 0.6f).SetRelative(true).SetEase(Ease.OutQuad).SetDelay(7.4f));
-        BowlSeq.Join(transform.DOLocalMoveZ(0.05f, 0.6f).SetRelative(true).SetEase(Ease.OutQuad).SetDelay(7.4f));
-        BowlSeq.Join(transform.DOLocalMoveY(-1f, 1f).SetRelative(true).SetEase(Ease.InQuad).SetDelay(7.6f));
-
-        BowlSeq.OnComplete(() => IsShakeEnd = true);
+            downSequence.OnComplete(Init_bowl);
+        });
     }
 
     public void Delay() => DelayTask().Forget();
@@ -63,5 +71,13 @@ public class bowl : MonoBehaviour
         gimmickSequence.isSequenceStop = true;
         await UniTask.WaitUntil(() => IsShakeEnd);
         gimmickSequence.isSequenceStop = false;
+    }
+
+    public void Interact(InputAction.CallbackContext context)
+    {
+        if (!IsShakeEnd && context.performed)
+        {
+            Init_bowl();
+        }
     }
 }

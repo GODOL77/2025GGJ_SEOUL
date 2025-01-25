@@ -28,10 +28,12 @@ namespace Player
             Ray ray = Camera.main.ScreenPointToRay(InputManager.MousePosition);
             RaycastHit hit;
             
-            if (Physics.Raycast(ray, out hit, float.MaxValue) &&
-                hit.transform.gameObject.TryGetComponent(out IInteract interact))
+            if (Physics.Raycast(ray, out hit, float.MaxValue))
             {
-                interact.Interact(context);
+                foreach (var interact in hit.transform.gameObject.GetComponentsInChildren<IInteract>())
+                {
+                    interact.Interact(context);
+                }
                 Debug.Log($"플레이어가 {hit.transform.name}과 상호작용");
             }
         }
