@@ -8,6 +8,33 @@ namespace Gimmick
     {
         public GameObject[] targetObjects;
         public Material material;
+
+        public bool HasMaterial
+        {
+            get
+            {
+                if (ReferenceEquals(targetObjects, null)) return false;
+                foreach (var obj in targetObjects)
+                {
+                    if (obj.TryGetComponent(out MeshRenderer meshRenderer))
+                    {
+                        bool same = false;
+                        var mats = meshRenderer.sharedMaterials.ToList();
+                        foreach (var mat in mats)
+                        {
+                            if (mat == material)
+                            {
+                                same = true;
+                                break;
+                            }
+                        }
+
+                        if (!same) return false;
+                    }
+                }
+                return true;
+            }
+        }
         
         public void AddMaterial()
         {
