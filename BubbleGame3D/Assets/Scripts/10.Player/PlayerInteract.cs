@@ -1,4 +1,5 @@
-﻿using GamePlay;
+﻿using System;
+using GamePlay;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -12,6 +13,14 @@ namespace Player
             InputManager.Interact.started += ClickEvent;
             InputManager.Interact.performed += ClickEvent;
             InputManager.Interact.canceled += ClickEvent;
+        }
+
+        public void OnDestroy()
+        {
+            if(!InputManager.HasInstance) return;
+            InputManager.Interact.started -= ClickEvent;
+            InputManager.Interact.performed -= ClickEvent;
+            InputManager.Interact.canceled -= ClickEvent;
         }
 
         public void ClickEvent(InputAction.CallbackContext context)
