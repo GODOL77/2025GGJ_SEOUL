@@ -1,38 +1,27 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Gimmick
 {
     public class GimmickSequence : MonoBehaviour
     {
+        public bool isOnAwake = false;
+        public bool isLoop = false;
+        [HideInInspector] public bool isSequenceStop = false;
         public GimmickAction[] gimmicks;
-
-        private Animator animator;
         
         [SerializeField] private GimmickAction _currentGimmick;
         private IEnumerator _currentGimmickEnumerator;
 
-        private bool isSequenceStop = false;
+        private Animator animator;
 
         public void Awake()
         {
-            _currentGimmickEnumerator = gimmicks.GetEnumerator();
-            if(_currentGimmickEnumerator.MoveNext())
-                _currentGimmick = _currentGimmickEnumerator.Current as GimmickAction;
-            else
-                isSequenceStop = true;
-
+            isSequenceStop = !isOnAwake;
             animator = GetComponent<Animator>();
-            
-            foreach (var gimmick in gimmicks)
-            {
-                gimmick.rateTimer.SetMax();
-            }
+
+            Init();
         }
 
         public void Update()
@@ -49,12 +38,30 @@ namespace Gimmick
                 if (!_currentGimmick.isLoop && _currentGimmick.loopCount.IsMax)
                 {
                     if (!_currentGimmickEnumerator.MoveNext())
-                        enabled = false;
+                    {
+                        if(isLoop) Init();
+                        else enabled = false;
+                    }
                     else
                         _currentGimmick = _currentGimmickEnumerator.Current as GimmickAction;
                 }
             }
         }
+
+        public void Init()
+        {
+            _currentGimmickEnumerator = gimmicks.GetEnumerator();
+            if(_currentGimmickEnumerator.MoveNext())
+                _currentGimmick = _currentGimmickEnumerator.Current as GimmickAction;
+            else
+                isSequenceStop = true;
+            foreach (var gimmick in gimmicks)
+                gimmick.rateTimer.SetMax();
+
+            enabled = true;
+        }
+        public void Play() => isSequenceStop = false;
+        public void Stop() => isSequenceStop = true;
         
         /// <summary>
         /// 적절한 애니메이션이 아니면 Sequence 중단

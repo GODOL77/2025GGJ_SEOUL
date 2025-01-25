@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Plane
   - Wall
+  - Shelf
+  - Dead
+  - Background
   layers:
   - Default
   - TransparentFX
