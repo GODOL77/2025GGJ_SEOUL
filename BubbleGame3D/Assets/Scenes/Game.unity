@@ -340,6 +340,21 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -110
       objectReference: {fileID: 0}
+    - target: {fileID: 5993169513674442169, guid: 2d3256a05a21e39428f1fe840f5a9612,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5993169513674442169, guid: 2d3256a05a21e39428f1fe840f5a9612,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 375
+      objectReference: {fileID: 0}
+    - target: {fileID: 5993169513674442169, guid: 2d3256a05a21e39428f1fe840f5a9612,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -500
+      objectReference: {fileID: 0}
     - target: {fileID: 7430104933714010747, guid: 2d3256a05a21e39428f1fe840f5a9612,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -2274,7 +2289,7 @@ MonoBehaviour:
   priority: 0
   blendDistance: 0
   weight: 1
-  sharedProfile: {fileID: 11400000, guid: a6560a915ef98420e9faacc1c7438823, type: 2}
+  sharedProfile: {fileID: 11400000, guid: 6b23f57db681f5a49833afd58a578639, type: 2}
 --- !u!4 &1480404936
 Transform:
   m_ObjectHideFlags: 0
