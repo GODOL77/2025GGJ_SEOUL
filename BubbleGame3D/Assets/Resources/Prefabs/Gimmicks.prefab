@@ -1,0 +1,1101 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &495207601095280146
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5407364129747270951}
+  m_Layer: 0
+  m_Name: Gimmicks
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5407364129747270951
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 495207601095280146}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 8136280073922264033}
+  - {fileID: 8644485587268356016}
+  - {fileID: 4606167971942341070}
+  - {fileID: 2135178694528488947}
+  - {fileID: 3045803260029490672}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1441106115774954665
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2135178694528488947}
+  - component: {fileID: 3385536141388262316}
+  - component: {fileID: 8785818268180498473}
+  m_Layer: 0
+  m_Name: 52
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2135178694528488947
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1441106115774954665}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5407364129747270951}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3385536141388262316
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1441106115774954665}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 544510ab89ad85d49a528492487183bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetObjects:
+  - {fileID: 0}
+  material: {fileID: 2100000, guid: cd601d43c46836b4c829668e1f771446, type: 2}
+--- !u!114 &8785818268180498473
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1441106115774954665}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f1584f4c51e1e34b80fcb36fd86d857, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isOnAwake: 1
+  isLoop: 1
+  delayTimer:
+    _min: 0
+    _max: 30
+    _current: 0
+    _isMin: 1
+    _isMax: 1
+    isOverMax: 0
+    isOverMin: 0
+  isSequenceStop: 0
+  gimmicks:
+  - isLoop: 0
+    loopCount:
+      _min: 0
+      _max: 1
+      _current: 0
+      _isMin: 0
+      _isMax: 0
+      isOverMax: 0
+      isOverMin: 0
+    rateTimer:
+      _min: 0
+      _max: 0
+      _current: 0
+      _isMin: 0
+      _isMax: 0
+      isOverMax: 0
+      isOverMin: 0
+    action:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 0}
+          m_TargetAssemblyTypeName: Doma, Assembly-CSharp
+          m_MethodName: OnDoma
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 0}
+          m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_MethodName: SetActive
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 1
+          m_CallState: 2
+    delay:
+      m_PersistentCalls:
+        m_Calls: []
+  - isLoop: 0
+    loopCount:
+      _min: 0
+      _max: 1
+      _current: 0
+      _isMin: 0
+      _isMax: 0
+      isOverMax: 0
+      isOverMin: 0
+    rateTimer:
+      _min: 0
+      _max: 15
+      _current: 0
+      _isMin: 0
+      _isMax: 0
+      isOverMax: 0
+      isOverMin: 0
+    action:
+      m_PersistentCalls:
+        m_Calls: []
+    delay:
+      m_PersistentCalls:
+        m_Calls: []
+  - isLoop: 0
+    loopCount:
+      _min: 0
+      _max: 1
+      _current: 0
+      _isMin: 0
+      _isMax: 0
+      isOverMax: 0
+      isOverMin: 0
+    rateTimer:
+      _min: 0
+      _max: 0
+      _current: 0
+      _isMin: 0
+      _isMax: 0
+      isOverMax: 0
+      isOverMin: 0
+    action:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 0}
+          m_TargetAssemblyTypeName: Doma, Assembly-CSharp
+          m_MethodName: PlayKnife
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    delay:
+      m_PersistentCalls:
+        m_Calls: []
+  - isLoop: 0
+    loopCount:
+      _min: 0
+      _max: 1
+      _current: 0
+      _isMin: 0
+      _isMax: 0
+      isOverMax: 0
+      isOverMin: 0
+    rateTimer:
+      _min: 0
+      _max: 5
+      _current: 0
+      _isMin: 0
+      _isMax: 0
+      isOverMax: 0
+      isOverMin: 0
+    action:
+      m_PersistentCalls:
+        m_Calls: []
+    delay:
+      m_PersistentCalls:
+        m_Calls: []
+  _currentGimmick:
+    isLoop: 0
+    loopCount:
+      _min: 0
+      _max: 1
+      _current: 0
+      _isMin: 1
+      _isMax: 0
+      isOverMax: 0
+      isOverMin: 0
+    rateTimer:
+      _min: 0
+      _max: 0
+      _current: 0
+      _isMin: 1
+      _isMax: 1
+      isOverMax: 0
+      isOverMin: 0
+    action:
+      m_PersistentCalls:
+        m_Calls: []
+    delay:
+      m_PersistentCalls:
+        m_Calls: []
+--- !u!1 &3477001956113166807
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8136280073922264033}
+  - component: {fileID: 4114511940292266034}
+  - component: {fileID: 6850677226522157076}
+  m_Layer: 0
+  m_Name: Sink
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8136280073922264033
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3477001956113166807}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5407364129747270951}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4114511940292266034
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3477001956113166807}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f1584f4c51e1e34b80fcb36fd86d857, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isOnAwake: 1
+  isLoop: 1
+  delayTimer:
+    _min: 0
+    _max: 0
+    _current: 0
+    _isMin: 1
+    _isMax: 1
+    isOverMax: 0
+    isOverMin: 0
+  isSequenceStop: 0
+  gimmicks:
+  - isLoop: 0
+    loopCount:
+      _min: 0
+      _max: 1
+      _current: 0
+      _isMin: 0
+      _isMax: 0
+      isOverMax: 0
+      isOverMin: 0
+    rateTimer:
+      _min: 0
+      _max: 1
+      _current: 0
+      _isMin: 0
+      _isMax: 0
+      isOverMax: 0
+      isOverMin: 0
+    action:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 0}
+          m_TargetAssemblyTypeName: Gimmick.Container.Sink, Assembly-CSharp
+          m_MethodName: Play
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    delay:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 0}
+          m_TargetAssemblyTypeName: Gimmick.Container.Sink, Assembly-CSharp
+          m_MethodName: GimmickDelay
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  _currentGimmick:
+    isLoop: 0
+    loopCount:
+      _min: 0
+      _max: 1
+      _current: 0
+      _isMin: 1
+      _isMax: 0
+      isOverMax: 0
+      isOverMin: 0
+    rateTimer:
+      _min: 0
+      _max: 2
+      _current: 0
+      _isMin: 1
+      _isMax: 1
+      isOverMax: 0
+      isOverMin: 0
+    action:
+      m_PersistentCalls:
+        m_Calls: []
+    delay:
+      m_PersistentCalls:
+        m_Calls: []
+--- !u!114 &6850677226522157076
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3477001956113166807}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 544510ab89ad85d49a528492487183bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetObjects:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  material: {fileID: 2100000, guid: 776132c3edfb45f45be235c501f729c0, type: 2}
+--- !u!1 &3493467381866006553
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3045803260029490672}
+  m_Layer: 0
+  m_Name: Plates
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3045803260029490672
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3493467381866006553}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1032897516666855823}
+  m_Father: {fileID: 5407364129747270951}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &6512516293506011375
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8644485587268356016}
+  - component: {fileID: 393624991435279985}
+  - component: {fileID: 5837348847623311502}
+  m_Layer: 0
+  m_Name: Flourbag
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8644485587268356016
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6512516293506011375}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5407364129747270951}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &393624991435279985
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6512516293506011375}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f1584f4c51e1e34b80fcb36fd86d857, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isOnAwake: 1
+  isLoop: 1
+  delayTimer:
+    _min: 0
+    _max: 2
+    _current: 0
+    _isMin: 1
+    _isMax: 1
+    isOverMax: 0
+    isOverMin: 0
+  isSequenceStop: 0
+  gimmicks:
+  - isLoop: 0
+    loopCount:
+      _min: 0
+      _max: 1
+      _current: 0
+      _isMin: 0
+      _isMax: 0
+      isOverMax: 0
+      isOverMin: 0
+    rateTimer:
+      _min: 0
+      _max: 0
+      _current: 0
+      _isMin: 0
+      _isMax: 0
+      isOverMax: 0
+      isOverMin: 0
+    action:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 0}
+          m_TargetAssemblyTypeName: FlourBag, Assembly-CSharp
+          m_MethodName: shake_mil
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    delay:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 0}
+          m_TargetAssemblyTypeName: FlourBag, Assembly-CSharp
+          m_MethodName: Delay
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - isLoop: 0
+    loopCount:
+      _min: 0
+      _max: 1
+      _current: 0
+      _isMin: 0
+      _isMax: 0
+      isOverMax: 0
+      isOverMin: 0
+    rateTimer:
+      _min: 0
+      _max: 0
+      _current: 0
+      _isMin: 0
+      _isMax: 0
+      isOverMax: 0
+      isOverMin: 0
+    action:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 0}
+          m_TargetAssemblyTypeName: UnityEngine.ParticleSystem, UnityEngine
+          m_MethodName: Play
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    delay:
+      m_PersistentCalls:
+        m_Calls: []
+  - isLoop: 0
+    loopCount:
+      _min: 0
+      _max: 1
+      _current: 0
+      _isMin: 0
+      _isMax: 0
+      isOverMax: 0
+      isOverMin: 0
+    rateTimer:
+      _min: 0
+      _max: 3
+      _current: 0
+      _isMin: 0
+      _isMax: 0
+      isOverMax: 0
+      isOverMin: 0
+    action:
+      m_PersistentCalls:
+        m_Calls: []
+    delay:
+      m_PersistentCalls:
+        m_Calls: []
+  - isLoop: 0
+    loopCount:
+      _min: 0
+      _max: 1
+      _current: 0
+      _isMin: 0
+      _isMax: 0
+      isOverMax: 0
+      isOverMin: 0
+    rateTimer:
+      _min: 0
+      _max: 0
+      _current: 0
+      _isMin: 0
+      _isMax: 0
+      isOverMax: 0
+      isOverMin: 0
+    action:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 0}
+          m_TargetAssemblyTypeName: UnityEngine.ParticleSystem, UnityEngine
+          m_MethodName: Stop
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    delay:
+      m_PersistentCalls:
+        m_Calls: []
+  - isLoop: 0
+    loopCount:
+      _min: 0
+      _max: 1
+      _current: 0
+      _isMin: 0
+      _isMax: 0
+      isOverMax: 0
+      isOverMin: 0
+    rateTimer:
+      _min: 0
+      _max: 1
+      _current: 0
+      _isMin: 0
+      _isMax: 0
+      isOverMax: 0
+      isOverMin: 0
+    action:
+      m_PersistentCalls:
+        m_Calls: []
+    delay:
+      m_PersistentCalls:
+        m_Calls: []
+  _currentGimmick:
+    isLoop: 0
+    loopCount:
+      _min: 0
+      _max: 1
+      _current: 0
+      _isMin: 1
+      _isMax: 0
+      isOverMax: 0
+      isOverMin: 0
+    rateTimer:
+      _min: 0
+      _max: 0
+      _current: 0
+      _isMin: 1
+      _isMax: 1
+      isOverMax: 0
+      isOverMin: 0
+    action:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 0}
+          m_TargetAssemblyTypeName: FlourBag, Assembly-CSharp
+          m_MethodName: shake_mil
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    delay:
+      m_PersistentCalls:
+        m_Calls: []
+--- !u!114 &5837348847623311502
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6512516293506011375}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 544510ab89ad85d49a528492487183bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetObjects:
+  - {fileID: 0}
+  material: {fileID: 2100000, guid: 00a094835a6962147bf0bc537fded43e, type: 2}
+--- !u!1 &6530565165853881225
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4606167971942341070}
+  - component: {fileID: 8955007783165538008}
+  - component: {fileID: 5254266481680625340}
+  m_Layer: 0
+  m_Name: Carrot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4606167971942341070
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6530565165853881225}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5407364129747270951}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8955007783165538008
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6530565165853881225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f1584f4c51e1e34b80fcb36fd86d857, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isOnAwake: 1
+  isLoop: 1
+  delayTimer:
+    _min: 0
+    _max: 30
+    _current: 0
+    _isMin: 1
+    _isMax: 1
+    isOverMax: 0
+    isOverMin: 0
+  isSequenceStop: 0
+  gimmicks:
+  - isLoop: 0
+    loopCount:
+      _min: 0
+      _max: 1
+      _current: 0
+      _isMin: 0
+      _isMax: 0
+      isOverMax: 0
+      isOverMin: 0
+    rateTimer:
+      _min: 0
+      _max: 0
+      _current: 0
+      _isMin: 0
+      _isMax: 0
+      isOverMax: 0
+      isOverMin: 0
+    action:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 0}
+          m_TargetAssemblyTypeName: Doma, Assembly-CSharp
+          m_MethodName: OnDoma
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 0}
+          m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_MethodName: SetActive
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 1
+          m_CallState: 2
+    delay:
+      m_PersistentCalls:
+        m_Calls: []
+  - isLoop: 0
+    loopCount:
+      _min: 0
+      _max: 1
+      _current: 0
+      _isMin: 0
+      _isMax: 0
+      isOverMax: 0
+      isOverMin: 0
+    rateTimer:
+      _min: 0
+      _max: 15
+      _current: 0
+      _isMin: 0
+      _isMax: 0
+      isOverMax: 0
+      isOverMin: 0
+    action:
+      m_PersistentCalls:
+        m_Calls: []
+    delay:
+      m_PersistentCalls:
+        m_Calls: []
+  - isLoop: 0
+    loopCount:
+      _min: 0
+      _max: 1
+      _current: 0
+      _isMin: 0
+      _isMax: 0
+      isOverMax: 0
+      isOverMin: 0
+    rateTimer:
+      _min: 0
+      _max: 0
+      _current: 0
+      _isMin: 0
+      _isMax: 0
+      isOverMax: 0
+      isOverMin: 0
+    action:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 0}
+          m_TargetAssemblyTypeName: Doma, Assembly-CSharp
+          m_MethodName: PlayKnife
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    delay:
+      m_PersistentCalls:
+        m_Calls: []
+  _currentGimmick:
+    isLoop: 0
+    loopCount:
+      _min: 0
+      _max: 1
+      _current: 0
+      _isMin: 1
+      _isMax: 0
+      isOverMax: 0
+      isOverMin: 0
+    rateTimer:
+      _min: 0
+      _max: 0
+      _current: 0
+      _isMin: 1
+      _isMax: 1
+      isOverMax: 0
+      isOverMin: 0
+    action:
+      m_PersistentCalls:
+        m_Calls: []
+    delay:
+      m_PersistentCalls:
+        m_Calls: []
+--- !u!114 &5254266481680625340
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6530565165853881225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 544510ab89ad85d49a528492487183bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetObjects:
+  - {fileID: 0}
+  material: {fileID: 2100000, guid: cd601d43c46836b4c829668e1f771446, type: 2}
+--- !u!1 &7614912676165990244
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1032897516666855823}
+  - component: {fileID: 2824477419556325802}
+  - component: {fileID: 3928729859418307195}
+  m_Layer: 0
+  m_Name: Plate Drop
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1032897516666855823
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7614912676165990244}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3045803260029490672}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2824477419556325802
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7614912676165990244}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f1584f4c51e1e34b80fcb36fd86d857, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isOnAwake: 1
+  isLoop: 1
+  delayTimer:
+    _min: 0
+    _max: 2
+    _current: 0
+    _isMin: 1
+    _isMax: 1
+    isOverMax: 0
+    isOverMin: 0
+  isSequenceStop: 0
+  gimmicks:
+  - isLoop: 0
+    loopCount:
+      _min: 0
+      _max: 1
+      _current: 0
+      _isMin: 0
+      _isMax: 0
+      isOverMax: 0
+      isOverMin: 0
+    rateTimer:
+      _min: 0
+      _max: 0
+      _current: 0
+      _isMin: 0
+      _isMax: 0
+      isOverMax: 0
+      isOverMin: 0
+    action:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 0}
+          m_TargetAssemblyTypeName: bowl, Assembly-CSharp
+          m_MethodName: Shake_bowl
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    delay:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 0}
+          m_TargetAssemblyTypeName: bowl, Assembly-CSharp
+          m_MethodName: Delay
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - isLoop: 0
+    loopCount:
+      _min: 0
+      _max: 1
+      _current: 0
+      _isMin: 0
+      _isMax: 0
+      isOverMax: 0
+      isOverMin: 0
+    rateTimer:
+      _min: 0
+      _max: 0
+      _current: 0
+      _isMin: 0
+      _isMax: 0
+      isOverMax: 0
+      isOverMin: 0
+    action:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 0}
+          m_TargetAssemblyTypeName: PlateDropGimmick, Assembly-CSharp
+          m_MethodName: Play
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    delay:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 0}
+          m_TargetAssemblyTypeName: PlateDropGimmick, Assembly-CSharp
+          m_MethodName: Delay
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  _currentGimmick:
+    isLoop: 0
+    loopCount:
+      _min: 0
+      _max: 1
+      _current: 0
+      _isMin: 1
+      _isMax: 0
+      isOverMax: 0
+      isOverMin: 0
+    rateTimer:
+      _min: 0
+      _max: 0
+      _current: 0
+      _isMin: 1
+      _isMax: 1
+      isOverMax: 0
+      isOverMin: 0
+    action:
+      m_PersistentCalls:
+        m_Calls: []
+    delay:
+      m_PersistentCalls:
+        m_Calls: []
+--- !u!114 &3928729859418307195
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7614912676165990244}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 544510ab89ad85d49a528492487183bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetObjects:
+  - {fileID: 0}
+  material: {fileID: 2100000, guid: 00a094835a6962147bf0bc537fded43e, type: 2}
