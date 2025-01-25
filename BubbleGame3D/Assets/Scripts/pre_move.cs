@@ -3,6 +3,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Collections;
+using Cysharp.Threading.Tasks;
 
 public class pre_move : MonoBehaviour
 {
@@ -36,6 +37,7 @@ public class pre_move : MonoBehaviour
         {
             Debug.Log("rb is null");
         }
+        AutoMove().Forget();
         currentJumpForce = maxJumpForce; // 시작할 때 최대 힘 설정
     }
 
@@ -105,8 +107,23 @@ public class pre_move : MonoBehaviour
         }
     }
 
+    public Vector2[] Spot = { new Vector2(1f, 0.4f), new Vector2(0.8f, 0.4f), new Vector2(0.4f, 0.4f), new Vector2(0.6f, 0.4f) };
+
+    async UniTask AutoMove()
+    {
+        for(int i = 0; i < 100; i++)
+        {
+            int randomValue = Random.Range(0, 4);
+            auto_Addforce(Spot[randomValue]);
+
+            Debug.Log(Spot[randomValue] +"ss  "+ (Vector2)gameObject.transform.localPosition);
+            await UniTask.Delay(2000);
+        }
+    }
+
     private bool isGrounded = false; // 바닥에 닿았는지 여부
 
+    /*
 private void OnTriggerEnter(Collider collision)
 {
     if ((LayerMask.GetMask("Bubble Attacker") & (1 << collision.gameObject.layer)) != 0)
@@ -148,7 +165,7 @@ private void OnTriggerEnter(Collider collision)
             Debug.Log("반전 완료");
         }
     }
-}
+}*/
 
 
 
@@ -172,6 +189,51 @@ private void OnTriggerEnter(Collider collision)
         Vector3 jumpDirection = right ? new Vector3(1, 1, 0) : new Vector3(-1, 1, 0);
         rb.AddForce(jumpDirection * forceAmount, ForceMode.Impulse);
     }
+
+    void auto_Addforce(Vector2 dir)
+    {
+        int Select_Sub = Random.Range(0, 2);
+        int Sub_Value = Random.Range(MinRandomAmount, MaxRandomAmount);
+        float Dir_X = dir.x - gameObject.transform.localPosition.x;
+        float Dir_Y = dir.y - gameObject.transform.localPosition.y;
+
+        
+        if (Dir_Y > 0)
+        {
+            top_rb.AddForce(new Vector3(0, 0.3f, 0) , ForceMode.Impulse);
+            if (Select_Sub == 1)
+                left_rb.AddForce(new Vector3(0, 0.3f, 0) , ForceMode.Impulse);
+            else
+                right_rb.AddForce(new Vector3(0, 0.3f, 0), ForceMode.Impulse);
+        }
+        else
+        {
+            top_rb.AddForce(new Vector3(0, -0.2f, 0), ForceMode.Impulse);
+            if (Select_Sub == 1)
+                left_rb.AddForce(new Vector3(0, -0.2f, 0), ForceMode.Impulse);
+            else
+                right_rb.AddForce(new Vector3(0, -0.2f, 0), ForceMode.Impulse);
+        }
+
+
+        if (Dir_X < 0)
+        {
+            left_rb.AddForce(new Vector3(-0.4f, 0, 0), ForceMode.Impulse);
+
+            if (Select_Sub == 1)
+                top_rb.AddForce(new Vector3(-0.4f, 0, 0) , ForceMode.Impulse);
+            else
+                down_rb.AddForce(new Vector3(-0.4f, 0, 0) , ForceMode.Impulse);
+        }
+        else if (Dir_X > 0)
+        {
+            right_rb.AddForce(new Vector3(0.4f, 0, 0) , ForceMode.Impulse);
+            if (Select_Sub == 1)
+                top_rb.AddForce(new Vector3(0.4f, 0, 0) , ForceMode.Impulse);
+            else
+                down_rb.AddForce(new Vector3(0.4f, 0, 0) , ForceMode.Impulse);
+        }
+    }
     void Bubble_Addforce(Vector3 dir)
     {
         int Select_Sub = Random.Range(0, 2);
@@ -183,19 +245,19 @@ private void OnTriggerEnter(Collider collision)
 
         if (Dir_Y > 0)
         {
-            top_rb.AddForce(new Vector3(0, 1, 0) * forceAmount, ForceMode.Impulse);
+            top_rb.AddForce(new Vector3(0, 1, 0), ForceMode.Impulse);
             if (Select_Sub == 1)
                 left_rb.AddForce(new Vector3(0, 1, 0) * Sub_Value, ForceMode.Impulse);
             else
-                right_rb.AddForce(new Vector3(0, 1, 0) * Sub_Value, ForceMode.Impulse);
+                right_rb.AddForce(new Vector3(0, 1, 0), ForceMode.Impulse);
         }
         else if (Dir_Y < 0)
         {
-            down_rb.AddForce(new Vector3(0, -1, 0) * forceAmount, ForceMode.Impulse);
+            down_rb.AddForce(new Vector3(0, -1, 0), ForceMode.Impulse);
             if (Select_Sub == 1)
-                left_rb.AddForce(new Vector3(0, -1, 0) * Sub_Value, ForceMode.Impulse);
+                left_rb.AddForce(new Vector3(0, -1, 0), ForceMode.Impulse);
             else
-                right_rb.AddForce(new Vector3(0, -1, 0) * Sub_Value, ForceMode.Impulse);
+                right_rb.AddForce(new Vector3(0, -1, 0), ForceMode.Impulse);
         }
 
         if (Dir_X < 0)
