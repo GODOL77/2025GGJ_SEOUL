@@ -20,6 +20,7 @@ public class pre_move : MonoBehaviour
 
     private bool canJump = false; // 점프 가능 상태
     private Coroutine jumpCoroutine;
+    private float lastWallHitTime = -1f; // 마지막 벽에 닿은 시간
 
     private void Start()
     {
@@ -44,6 +45,12 @@ public class pre_move : MonoBehaviour
     if (canJump && Keyboard.current.spaceKey.wasPressedThisFrame)
     {
         ApplyJumpForce();
+    }
+
+    Vector3 force = new Vector3(1, 1, 0); // 예시로 위 방향으로 힘을 설정
+    if (force.x > 5)
+    {
+        force.x = 5;
     }
 
         // if (Keyboard.current.wKey.wasPressedThisFrame && top_rb != null)
@@ -90,6 +97,13 @@ private void OnTriggerEnter(Collider collision)
     if (collision.gameObject.CompareTag("Wall"))
     {
         Debug.Log("벽 닿았음");
+        if (Time.time - lastWallHitTime > 1f)
+        {
+        Vector3 currentVelocity = rb.velocity;
+        currentVelocity.x = -currentVelocity.x;  // X축 속도 반전
+        rb.velocity = currentVelocity;  // 반전된 속도 적용
+        lastWallHitTime = Time.time;
+        }
     }
 }
 
