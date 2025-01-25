@@ -67,6 +67,10 @@ public class pre_move : MonoBehaviour
         {
             force.x = -5;
         }
+        else if (force.y > 5)
+        {
+            force.y = 5;
+        }
 
         float currentHeight = transform.position.y;
 
@@ -92,11 +96,11 @@ public class pre_move : MonoBehaviour
     {
         if (right == true)
         {
-            Bubble_Addforce(new Vector3(0.5f, 2, 0)); // 위로가는 힘 적용
+            Bubble_Addforce(new Vector3(0.5f, 1, 0)); // 위로가는 힘 적용
         }
         else
         {
-            Bubble_Addforce(new Vector3(-0.5f, 2, 0));
+            Bubble_Addforce(new Vector3(-0.5f, 1, 0));
         }
     }
 
