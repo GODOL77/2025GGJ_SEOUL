@@ -1,6 +1,7 @@
 ﻿using System;
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using Util;
 
 namespace Player
@@ -16,16 +17,15 @@ namespace Player
 
         public void Awake()
         {
-            InputManager.CameraMoveRight.performed += context =>
-            {
-                _moveTransformCount.Current++;
-                Move(moveTransform[_moveTransformCount.Current].position);
-            };
-            InputManager.CameraMoveLeft.performed += context =>
-            {
-                _moveTransformCount.Current--;
-                Move(moveTransform[_moveTransformCount.Current].position);
-            };
+            InputManager.CameraMoveRight.performed += MoveRight;
+            InputManager.CameraMoveLeft.performed += MoveLeft;
+        }
+
+        public void OnDestroy()
+        {
+            if (!InputManager.HasInstance) return;
+            InputManager.CameraMoveRight.performed -= MoveRight;
+            InputManager.CameraMoveLeft.performed -= MoveLeft;
         }
 
         public void Move(Vector3 movePosition)
@@ -38,6 +38,18 @@ namespace Player
              
             _movePosition = movePosition;
             _moveTween = Camera.main.gameObject.transform.DOMove(_movePosition, moveDuration).SetEase(Ease.OutExpo);
+        }
+
+        private void MoveLeft(InputAction.CallbackContext context)
+        {
+            _moveTransformCount.Current--;
+            Move(moveTransform[_moveTransformCount.Current].position);
+        }
+
+        private void MoveRight(InputAction.CallbackContext context)
+        {
+            _moveTransformCount.Current++;
+            Move(moveTransform[_moveTransformCount.Current].position);
         }
     }
 }
