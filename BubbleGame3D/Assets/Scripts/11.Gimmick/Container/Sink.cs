@@ -20,6 +20,11 @@ namespace Gimmick.Container
         public StatusValue<float> faucetRotateAmount = new(0, 0, 720);
         // 싱크대 안에 물이 얼마나 찼는지
         public StatusValue<float> pool = new(0, 0, 1);
+        public ParticleSystem waterParticle;
+        public Transform waterTransform;
+        // 싱크대 안에 있는 물이 찰 곳 
+        // 0 : Start, 1 : End
+        public Transform[] waterFillTransforms;
         // 수도꼭치 드래그 힘
         public float dragPower = 10f;
 
@@ -29,12 +34,13 @@ namespace Gimmick.Container
 
         private bool isFaucetOn = false; // 수도꼭지가 틀어져 있는지
         private bool isDrag = false;
-        private CancellationTokenSource _cancelToken = new();
+        private CancellationTokenSource _activeFaucetCancelToken = new();
         private CancellationTokenSource _faucetRotateCancelToken = new();
         private CancellationTokenSource _dragCancelToken = new();
 
         public void Init()
         {
+            waterTransform.position = waterFillTransforms[0].position;
             isFaucetOn = false;
             pool.SetMin();
 
@@ -43,6 +49,8 @@ namespace Gimmick.Container
         
         public void Play()
         {
+            if(pool.IsMax) return;
+            
             if(!gimmickMaterialControl.HasMaterial)
                 gimmickMaterialControl.AddMaterial();
             RotateTask(_faucetRotateCancelToken.Token).Forget();
@@ -50,26 +58,31 @@ namespace Gimmick.Container
 
         public void Stop()
         {
-            _cancelToken.Cancel();
-            _cancelToken.Dispose();
-            _cancelToken = new();
+            _activeFaucetCancelToken.Cancel();
+            _activeFaucetCancelToken.Dispose();
+            _activeFaucetCancelToken = new();
             
+            waterParticle.Stop();
             gimmickMaterialControl.RemoveMaterial();
         }
 
         private async UniTask ActiveFaucet(CancellationToken token)
         {
+            waterParticle.Play();
             while (!token.IsCancellationRequested)
             {
                 await UniTask.WaitForEndOfFrame();
                 pool.Current += Time.deltaTime;
-                
-                if(pool.IsMax) Stop();
+                waterTransform.position = Vector3.Lerp(waterFillTransforms[0].position, waterFillTransforms[1].position, pool.Current / pool.Max);
+
+                if (pool.IsMax) break;
             }
+            Stop();
         }
 
         private async UniTask RotateTask(CancellationToken token)
         {
+            waterParticle.Stop();
             while (!token.IsCancellationRequested)
             {
                 await UniTask.WaitForFixedUpdate();
@@ -82,7 +95,8 @@ namespace Gimmick.Container
                 if (faucetRotateAmount.IsMax)
                 {
                     isFaucetOn = true;
-                    ActiveFaucet(_cancelToken.Token).Forget();
+                    ActiveFaucet(_activeFaucetCancelToken.Token).Forget();
+                    break;
                 }
             }
         }
@@ -133,6 +147,10 @@ namespace Gimmick.Container
                 _faucetRotateCancelToken.Cancel();
                 _faucetRotateCancelToken.Dispose();
                 _faucetRotateCancelToken = new();
+                _activeFaucetCancelToken.Cancel();
+                _activeFaucetCancelToken.Dispose();
+                _activeFaucetCancelToken = new();
+                
                 DragTask(_dragCancelToken.Token).Forget();
                 isDrag = true;
             }
