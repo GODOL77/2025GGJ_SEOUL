@@ -11,9 +11,16 @@ namespace Manager
         public AudioClip hardBGMClip;
         public float soundChangeDuration = 300f;
 
+        public float playTime = 0f;
+
         public void Start()
         {
             OnBGMSound().Forget();
+        }
+
+        public void Update()
+        {
+            playTime += Time.deltaTime;
         }
 
         public async UniTask OnBGMSound()
