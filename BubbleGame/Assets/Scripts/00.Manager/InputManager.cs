@@ -12,7 +12,9 @@ public class InputManager : Singleton<InputManager>
     public static bool CameraMoveRightPress => Instance.input.Camera.MoveRight.ReadValue<float>() > 0f;
     
     public static Vector2 MousePosition => Mouse.current.position.value;
+    public static Vector2 MouseDrag => InteractButtonPress ? Instance.input.PlayerAction.Drag.ReadValue<Vector2>() : Vector2.zero;
 
+    public static bool InteractButtonPress => Instance.input.PlayerAction.Interact.ReadValue<float>() > 0f;
     public static InputAction Interact => Instance.input.PlayerAction.Interact;
 
     private PlayerInputSystem input;
