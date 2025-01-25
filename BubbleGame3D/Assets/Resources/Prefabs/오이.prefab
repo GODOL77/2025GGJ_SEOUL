@@ -153,6 +153,7 @@ MonoBehaviour:
   gimmickSequence: {fileID: 0}
   gimmickMaterialControl: {fileID: 0}
   VegetableSlayer: {fileID: 8714351631910587526}
+  slashSound: {fileID: 6387699052621633396}
   attackCollider: {fileID: 9075628085066069496}
   vegetable: {fileID: 4612484490324118713}
   IsComplete: 0
@@ -5163,66 +5164,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1991997117182387614, guid: b9c842e248558f241ade8407e7e3f693,
+    - target: {fileID: 8795516736240412944, guid: b9c842e248558f241ade8407e7e3f693,
         type: 3}
-      propertyPath: looping
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1991997117182387614, guid: b9c842e248558f241ade8407e7e3f693,
-        type: 3}
-      propertyPath: playOnAwake
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1991997117182387614, guid: b9c842e248558f241ade8407e7e3f693,
-        type: 3}
-      propertyPath: startDelay.scalar
-      value: 2.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3087963313810721287, guid: b9c842e248558f241ade8407e7e3f693,
-        type: 3}
-      propertyPath: looping
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3087963313810721287, guid: b9c842e248558f241ade8407e7e3f693,
-        type: 3}
-      propertyPath: playOnAwake
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3087963313810721287, guid: b9c842e248558f241ade8407e7e3f693,
-        type: 3}
-      propertyPath: startDelay.scalar
-      value: 1.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 6097323346426576944, guid: b9c842e248558f241ade8407e7e3f693,
-        type: 3}
-      propertyPath: looping
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6097323346426576944, guid: b9c842e248558f241ade8407e7e3f693,
-        type: 3}
-      propertyPath: lengthInSec
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 6097323346426576944, guid: b9c842e248558f241ade8407e7e3f693,
-        type: 3}
-      propertyPath: playOnAwake
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6097323346426576944, guid: b9c842e248558f241ade8407e7e3f693,
-        type: 3}
-      propertyPath: startDelay.scalar
-      value: 0.6
-      objectReference: {fileID: 0}
-    - target: {fileID: 6097323346426576944, guid: b9c842e248558f241ade8407e7e3f693,
-        type: 3}
-      propertyPath: InitialModule.startLifetime.scalar
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 6097323346426576944, guid: b9c842e248558f241ade8407e7e3f693,
-        type: 3}
-      propertyPath: InitialModule.startLifetime.minScalar
-      value: 1
-      objectReference: {fileID: 0}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 24b64734c3993014694b804f8eb3d014, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5231,6 +5177,12 @@ PrefabInstance:
 --- !u!4 &3620763331648004740 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1195090790911827168, guid: b9c842e248558f241ade8407e7e3f693,
+    type: 3}
+  m_PrefabInstance: {fileID: 2497907551820086884}
+  m_PrefabAsset: {fileID: 0}
+--- !u!82 &6387699052621633396 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 8795516736240412944, guid: b9c842e248558f241ade8407e7e3f693,
     type: 3}
   m_PrefabInstance: {fileID: 2497907551820086884}
   m_PrefabAsset: {fileID: 0}

@@ -1,9 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
+using Manager;
 using TMPro;
 using UnityEngine;
-using UnityEngine.SocialPlatforms.Impl;
-using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class ScoreManager : MonoBehaviour
@@ -12,6 +9,7 @@ public class ScoreManager : MonoBehaviour
     public float score;
     public float scoreIncrement = 5f;
     // Start is called before the first frame update
+    
     void Start()
     {
         score = 0f;
@@ -20,6 +18,8 @@ public class ScoreManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(GameManager.Instance.isGameEnd) return;
+        
         score += Time.deltaTime * scoreIncrement;
         int intScore = (int)score;
         scoreText.text = "Score: " + intScore;

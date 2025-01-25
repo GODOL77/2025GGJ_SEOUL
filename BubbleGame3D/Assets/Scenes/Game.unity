@@ -784,6 +784,11 @@ MonoBehaviour:
   easyBGMClip: {fileID: 8300000, guid: a2ff7eba1ee695c46bbee309169032ea, type: 3}
   hardBGMClip: {fileID: 8300000, guid: 2527040df21e61f4bbb8f8eac504498f, type: 3}
   soundChangeDuration: 300
+  playerDieAction:
+    m_PersistentCalls:
+      m_Calls: []
+  playTime: 0
+  isGameEnd: 0
 --- !u!4 &175543410
 Transform:
   m_ObjectHideFlags: 0
@@ -946,7 +951,7 @@ PrefabInstance:
     - target: {fileID: 8847371057183425510, guid: 10af09c7e4859ae4c8f5a34537897c08,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.016139526
+      value: -0.01986874
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1320,7 +1325,7 @@ PrefabInstance:
     - target: {fileID: 1959452341044245660, guid: 9040f19d5178fae45a0d892c28712160,
         type: 3}
       propertyPath: forceAmount
-      value: 0.01
+      value: 0.05
       objectReference: {fileID: 0}
     - target: {fileID: 1959452341044245660, guid: 9040f19d5178fae45a0d892c28712160,
         type: 3}

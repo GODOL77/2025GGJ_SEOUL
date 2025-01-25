@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Collections;
 using Cysharp.Threading.Tasks;
+using Manager;
 using Util;
 using Random = UnityEngine.Random;
 
@@ -48,6 +49,19 @@ public class pre_move : MonoBehaviour
     public void OnCollisionEnter(Collision other)
     {
         CalReflection(other);
+        if ((LayerMask.GetMask("Bubble Attacker") & (1 << other.gameObject.layer)) != 0)
+        {
+            dieParticle.gameObject.SetActive(true);
+            dieParticle.transform.position = transform.position;
+            dieParticle.Play();
+
+            var gameManager = FindObjectOfType<GameManager>();
+            gameManager.playerDieAction?.Invoke();
+            Destroy(gameObject);
+            Debug.Log("버블 사망");
+            return;
+        }
+        
         void CalReflection(Collision other)
         {
             // 충돌 지점과 법선 벡터 가져오기 (첫 번째 접촉점 기준)
@@ -73,20 +87,12 @@ public class pre_move : MonoBehaviour
 
     public void OnCollisionStay(Collision other)
     {
-        if (Mathf.Abs(rb.angularVelocity.magnitude) < 0.01f)
+        if (Mathf.Abs(rb.angularVelocity.magnitude) < 0.001f)
         {
-            gameObject.transform.Rotate(new Vector3(0,0,90));
+            RotateTask().Forget();
             rb.AddTorque(Vector3.forward * rotateForce);
-        }
-        
-        if ((LayerMask.GetMask("Bubble Attacker") & (1 << other.gameObject.layer)) != 0)
-        {
-            dieParticle.gameObject.SetActive(true);
-            dieParticle.transform.position = transform.position;
-            dieParticle.Play();
-            Destroy(gameObject);
-            Debug.Log("버블 사망");
-            return;
+            float clampedSpeed = Mathf.Clamp(rb.angularVelocity.magnitude, -rotateForce, rotateForce);
+            rb.angularVelocity = rb.angularVelocity.normalized * clampedSpeed;
         }
     }
     void AutoMove(Vector2 dir)
@@ -106,6 +112,17 @@ public class pre_move : MonoBehaviour
         {
             float clampedSpeed = Mathf.Clamp(rbVel.velocity.magnitude, velocityLimit.Min,velocityLimit.Max);
             rbVel.velocity = rbVel.velocity.normalized * clampedSpeed;
+        }
+    }
+
+    async UniTask RotateTask()
+    {
+        float t = 0f;
+        while (t < 1f)
+        {
+            await UniTask.Yield();
+            t = Time.deltaTime;
+            gameObject.transform.Rotate(new Vector3(0,0,90f * Time.deltaTime));
         }
     }
 }

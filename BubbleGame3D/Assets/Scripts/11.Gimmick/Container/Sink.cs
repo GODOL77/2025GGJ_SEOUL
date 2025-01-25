@@ -133,8 +133,6 @@ namespace Gimmick.Container
                 Ray ray = Camera.main.ScreenPointToRay(InputManager.MousePosition);
                 RaycastHit hit;
 
-                Debug.Log(InputManager.MouseDrag);
-                
                 if (isDrag && Physics.Raycast(ray, out hit, float.MaxValue) &&
                     hit.transform.gameObject == gameObject)
                 {
