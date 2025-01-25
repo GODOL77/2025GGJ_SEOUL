@@ -1,4 +1,5 @@
-﻿using UnityEngine.Audio;
+﻿using UnityEngine;
+using UnityEngine.Audio;
 using Util;
 
 namespace Manager
@@ -9,10 +10,11 @@ namespace Manager
         
         public void Awake()
         {
+            mixer = Resources.Load<AudioMixer>("Audio/Default Mixer");
             DontDestroyOnLoad(gameObject);
         }
 
-        public void SetVolume(string audioName, float value) => mixer.SetFloat(audioName, value);
-        public float GetVolume(string audioName) => mixer.GetFloat(audioName, out float value) ? value : 0;
+        public static void SetVolume(string audioName, float value) => Instance.mixer.SetFloat(audioName, value);
+        public static float GetVolume(string audioName) => Instance.mixer.GetFloat(audioName, out float value) ? value : 0;
     }
 }

@@ -178,9 +178,15 @@ private void OnTriggerEnter(Collider collision)
         int Sub_Value = Random.Range(MinRandomAmount, MaxRandomAmount);
         float Dir_X = dir.x;
         float Dir_Y = dir.y;
+
+        float Dir_Sum = Dir_X* Dir_X + Dir_Y* Dir_Y;
+
+        float ForceY = Dir_Y/Dir_Sum *forceAmount;
+        float ForceX = Dir_X/Dir_Sum * forceAmount;
+
         if (Dir_Y > 0)
         {
-            top_rb.AddForce(new Vector3(0, 1, 0) * forceAmount, ForceMode.Impulse);
+            top_rb.AddForce(new Vector3(0, 1, 0) *ForceY, ForceMode.Impulse);
             if (Select_Sub == 1)
                 left_rb.AddForce(new Vector3(0, 1, 0) * Sub_Value, ForceMode.Impulse);
             else
@@ -188,7 +194,7 @@ private void OnTriggerEnter(Collider collision)
         }
         else if (Dir_Y < 0)
         {
-            down_rb.AddForce(new Vector3(0, -1, 0) * forceAmount, ForceMode.Impulse);
+            down_rb.AddForce(new Vector3(0, -1, 0) * ForceY, ForceMode.Impulse);
             if (Select_Sub == 1)
                 left_rb.AddForce(new Vector3(0, -1, 0) * Sub_Value, ForceMode.Impulse);
             else
@@ -197,7 +203,7 @@ private void OnTriggerEnter(Collider collision)
 
         if (Dir_X < 0)
         {
-            left_rb.AddForce(new Vector3(-1, 0, 0) * forceAmount, ForceMode.Impulse);
+            left_rb.AddForce(new Vector3(-1, 0, 0) * ForceX, ForceMode.Impulse);
 
             if (Select_Sub == 1)
                 top_rb.AddForce(new Vector3(-1, 0, 0) * Sub_Value, ForceMode.Impulse);
@@ -206,7 +212,7 @@ private void OnTriggerEnter(Collider collision)
         }
         else if (Dir_X > 0)
         {
-            right_rb.AddForce(new Vector3(1, 0, 0) * forceAmount, ForceMode.Impulse);
+            right_rb.AddForce(new Vector3(1, 0, 0)  *ForceX, ForceMode.Impulse);
             if (Select_Sub == 1)
                 top_rb.AddForce(new Vector3(1, 0, 0) * Sub_Value, ForceMode.Impulse);
             else
