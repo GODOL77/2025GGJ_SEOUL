@@ -7,7 +7,7 @@ public class ScreenResolutionManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Screen.SetResolution(960, 1080, false);
+        Screen.SetResolution(960, 1080, true);
         DontDestroyOnLoad(gameObject);
     }
 
