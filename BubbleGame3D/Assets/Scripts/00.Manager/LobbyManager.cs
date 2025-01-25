@@ -25,5 +25,10 @@ namespace Manager
         {
             SceneManager.LoadScene("Game");
         }
+
+        public void Lobby()
+        {
+            SceneManager.LoadScene("Lobby");
+        }
     }
 }
