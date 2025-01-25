@@ -19,13 +19,14 @@ public class bowl : MonoBehaviour
     public void init_bowl()
     {
         BowlSeq.Kill();
+        gameObject.transform.position = Base_Pos;
+        gameObject.transform.rotation = Quaternion.EulerRotation(new Vector3(0,0,-4));
     }
 
     public void shake_bowl()
     {
 
         BowlSeq.Append(bowls.transform.DORotate(new Vector3(0, 0, 8), 1f).SetRelative(true).SetLoops(2, LoopType.Yoyo).SetEase(Ease.OutQuad));
-        BowlSeq.Join(bowls.transform.DOScale(1.2f, 8f));
         BowlSeq.Join(bowls.transform.DOMoveZ(-0.01f, 1f).SetRelative(true).SetLoops(2, LoopType.Incremental).SetEase(Ease.OutQuad));
 
         BowlSeq.Append(bowls.transform.DORotate(new Vector3(0, 0, 8), 0.8f).SetRelative(true).SetLoops(2, LoopType.Yoyo).SetEase(Ease.OutQuad).SetDelay(2f));
