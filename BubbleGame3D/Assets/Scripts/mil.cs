@@ -45,8 +45,8 @@ public class mil : MonoBehaviour, IInteract
         {
             isEnd = true;
             downSequence = DOTween.Sequence();
-            downSequence.Append(transform.DOLocalMove(new Vector3(0, -1.2f, 0.5f), 3f).SetRelative(true).SetEase(Ease.InSine);
-            downSequence.Join(transform.DOLocalRotate(new Vector3(145, 0, 0f), 2f).SetRelative(true).SetEase(Ease.InSine);
+            downSequence.Append(transform.DOLocalMove(new Vector3(0, -1.2f, 0.5f), 3f).SetRelative(true).SetEase(Ease.InSine));
+            downSequence.Join(transform.DOLocalRotate(new Vector3(145, 0, 0f), 2f).SetRelative(true).SetEase(Ease.InSine));
             downSequence.OnComplete(init_mil);
         });
     }
@@ -55,7 +55,7 @@ public class mil : MonoBehaviour, IInteract
     {
         if(context.performed)
         {
-            nit_mil();
+            init_mil();
         }
     }
 }
