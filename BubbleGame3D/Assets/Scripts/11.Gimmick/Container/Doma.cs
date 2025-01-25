@@ -7,6 +7,8 @@ using DG.Tweening;
 using System.Linq.Expressions;
 using GamePlay;
 using System.Runtime.InteropServices;
+using System.Threading;
+using Gimmick;
 
 
 public class Doma : MonoBehaviour, IInteract
@@ -14,74 +16,74 @@ public class Doma : MonoBehaviour, IInteract
     private bool isClick = false;
     private bool isPattern = false;
 
-
+    public GimmickSequence gimmickSequence;
+    public GimmickMaterialControl gimmickMaterialControl;
     public ParticleSystem VegetableSlayer;
 
-
     public GameObject vegetable;
-    public Vector3 BaseVegetablePos;
+    private Vector3 BaseVegetablePos;
     private Vector3 Click_MousePos;
+    private CancellationTokenSource _dragCancelToken = new();
 
     public bool IsComplete = false;
     private void Awake()
     {
-        BaseVegetablePos = vegetable.transform.position;
-        PlayPattern(5f).Forget();
+        BaseVegetablePos = vegetable.transform.localPosition;
+        gameObject.SetActive(false);
     }
 
-    async UniTask PlayPattern(float LimiteTime)
+    public void Init()
     {
         transform.localPosition = BaseVegetablePos;
-        transform.localRotation = Quaternion.Euler(0,0,-90);
-        IsComplete = false;
-        await UniTask.Delay((int)(1000 * LimiteTime));
-        if (IsComplete)
-        {
-            Debug.Log("파훼");
-        }
-        else
-        {
-            vegetable.transform.DOLocalMoveZ(0.7f, 0.6f).SetEase(Ease.InQuad);
-            vegetable.transform.DOLocalMoveY(0.7f, 0.4f).SetEase(Ease.InQuad);
-            vegetable.transform.DOLocalRotate(new Vector3(60f,0,0), 0.5f).SetEase(Ease.InQuad).SetDelay(0.2f);
-            vegetable.transform.DOLocalMoveY(-0.5f, 0.5f).SetEase(Ease.InQuad).SetDelay(0.3f).OnComplete(()=>
-            {
-
-                PlayParticleTwice().Forget();
-            });
-        }
+        transform.localRotation = Quaternion.Euler(0, 0, -90);
     }
+
+    public void OnDoma()
+    {
+        if (!gimmickMaterialControl.HasMaterial) gimmickMaterialControl.AddMaterial();
+        Init();
+    }
+
+    public void PlayKnife()
+    {
+        IsComplete = false;
+
+        vegetable.transform.DOLocalMoveZ(0.7f, 0.6f).SetEase(Ease.InQuad);
+        vegetable.transform.DOLocalMoveY(0.7f, 0.4f).SetEase(Ease.InQuad);
+        vegetable.transform.DOLocalRotate(new Vector3(60f, 0, 0), 0.5f).SetEase(Ease.InQuad).SetDelay(0.2f);
+        vegetable.transform.DOLocalMoveY(-0.5f, 0.5f).SetEase(Ease.InQuad).SetDelay(0.3f).OnComplete(() =>
+        {
+            if(!IsComplete) PlayParticleTwice().Forget();
+        });
+    }
+
     private async UniTask PlayParticleTwice()
     {
-
+        gimmickSequence.isSequenceStop = true;
         for (int i = 0; i < 2; i++) // 2번 반복
         {
             VegetableSlayer.Play(); // 파티클 시스템 재생
             await UniTask.Delay((int)((VegetableSlayer.main.duration + VegetableSlayer.main.startLifetime.constantMax) * 1000));
             // 파티클 재생 완료 후 대기
         }
+        gimmickSequence.isSequenceStop = false;
     }
 
-
-
-
-        private bool Check_DragOut()
+    private bool Check_DragOut()
     {
         float dis = Vector3.Distance(Click_MousePos, InputManager.MousePosition);
         return dis > 300f;
     }
 
-
-    async UniTask drag()
+    async UniTask drag(CancellationToken token)
     {
-        while (isClick && Mouse.current.leftButton.isPressed)
+        while (!token.IsCancellationRequested && Mouse.current.leftButton.isPressed)
         {
             Vector3 screenPosition = InputManager.MousePosition; // ���콺 ȭ�� ��ǥ
             screenPosition.z = Camera.main.WorldToScreenPoint(vegetable.transform.position).z; // ��ä�� ���� Z ��
             Vector3 worldPosition = Camera.main.ScreenToWorldPoint(screenPosition);
             //vegetable.transform.position = worldPosition;
-            vegetable.transform.position = Vector3.Lerp(
-            vegetable.transform.position, worldPosition,  0.3f);
+            vegetable.transform.position = Vector3.Lerp(vegetable.transform.position, worldPosition,  0.3f);
             await UniTask.Yield();
         }
 
@@ -112,11 +114,18 @@ public class Doma : MonoBehaviour, IInteract
     {
         if (context.performed)
         {
-            Debug.Log("클릭");
             isClick = true;
             Click_MousePos = InputManager.MousePosition;
-            drag().Forget();
+            _dragCancelToken.Cancel();
+            _dragCancelToken.Dispose();
+            _dragCancelToken = new();
+            drag(_dragCancelToken.Token).Forget();
         }
-
+        else if (context.canceled)
+        {
+            _dragCancelToken.Cancel();
+            _dragCancelToken.Dispose();
+            _dragCancelToken = new();
+        }
     }
 }
