@@ -168,7 +168,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetObjects:
-  - {fileID: 0}
+  - {fileID: 3745759085012807187}
   material: {fileID: 2100000, guid: 776132c3edfb45f45be235c501f729c0, type: 2}
 --- !u!114 &41910433
 MonoBehaviour:
@@ -183,7 +183,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isOnAwake: 1
-  isLoop: 0
+  isLoop: 1
+  delayTimer:
+    _min: 0
+    _max: 2
+    _current: 0
+    _isMin: 1
+    _isMax: 1
+    isOverMax: 0
+    isOverMin: 0
   isSequenceStop: 0
   gimmicks:
   - isLoop: 0
@@ -197,7 +205,7 @@ MonoBehaviour:
       isOverMin: 0
     rateTimer:
       _min: 0
-      _max: 1
+      _max: 0
       _current: 0
       _isMin: 0
       _isMax: 0
@@ -206,7 +214,54 @@ MonoBehaviour:
     action:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 0}
+        - m_Target: {fileID: 689956131}
+          m_TargetAssemblyTypeName: bowl, Assembly-CSharp
+          m_MethodName: Shake_bowl
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    delay:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 689956131}
+          m_TargetAssemblyTypeName: bowl, Assembly-CSharp
+          m_MethodName: Delay
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - isLoop: 0
+    loopCount:
+      _min: 0
+      _max: 1
+      _current: 0
+      _isMin: 0
+      _isMax: 0
+      isOverMax: 0
+      isOverMin: 0
+    rateTimer:
+      _min: 0
+      _max: 0
+      _current: 0
+      _isMin: 0
+      _isMax: 0
+      isOverMax: 0
+      isOverMin: 0
+    action:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 689956132}
           m_TargetAssemblyTypeName: PlateDropGimmick, Assembly-CSharp
           m_MethodName: Play
           m_Mode: 1
@@ -220,7 +275,19 @@ MonoBehaviour:
           m_CallState: 2
     delay:
       m_PersistentCalls:
-        m_Calls: []
+        m_Calls:
+        - m_Target: {fileID: 689956132}
+          m_TargetAssemblyTypeName: PlateDropGimmick, Assembly-CSharp
+          m_MethodName: Delay
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
   _currentGimmick:
     isLoop: 0
     loopCount:
@@ -456,7 +523,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: f767c31337de12a4f84bb318bf9eab4d,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.075
+      value: -0.038073417
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f767c31337de12a4f84bb318bf9eab4d,
         type: 3}
@@ -1099,6 +1166,167 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 4107724520122833295}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &689956126
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 543450652530295931}
+    m_Modifications:
+    - target: {fileID: 183264236110826051, guid: 8b857ebee4acb434093fe486feb2a66c,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.3074
+      objectReference: {fileID: 0}
+    - target: {fileID: 183264236110826051, guid: 8b857ebee4acb434093fe486feb2a66c,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.9297
+      objectReference: {fileID: 0}
+    - target: {fileID: 183264236110826051, guid: 8b857ebee4acb434093fe486feb2a66c,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 183264236110826051, guid: 8b857ebee4acb434093fe486feb2a66c,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.99939084
+      objectReference: {fileID: 0}
+    - target: {fileID: 183264236110826051, guid: 8b857ebee4acb434093fe486feb2a66c,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 183264236110826051, guid: 8b857ebee4acb434093fe486feb2a66c,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 183264236110826051, guid: 8b857ebee4acb434093fe486feb2a66c,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.034899585
+      objectReference: {fileID: 0}
+    - target: {fileID: 183264236110826051, guid: 8b857ebee4acb434093fe486feb2a66c,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 183264236110826051, guid: 8b857ebee4acb434093fe486feb2a66c,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 183264236110826051, guid: 8b857ebee4acb434093fe486feb2a66c,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: -4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8163433649925417511, guid: 8b857ebee4acb434093fe486feb2a66c,
+        type: 3}
+      propertyPath: m_Name
+      value: "\uC5F0\uCD9C \uADF8\uB987"
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 3332614412631049108, guid: 8b857ebee4acb434093fe486feb2a66c, type: 3}
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8163433649925417511, guid: 8b857ebee4acb434093fe486feb2a66c,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 689956132}
+    - targetCorrespondingSourceObject: {fileID: 8163433649925417511, guid: 8b857ebee4acb434093fe486feb2a66c,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 689956131}
+    - targetCorrespondingSourceObject: {fileID: 7225871999911396309, guid: 8b857ebee4acb434093fe486feb2a66c,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 689956130}
+  m_SourcePrefab: {fileID: 100100000, guid: 8b857ebee4acb434093fe486feb2a66c, type: 3}
+--- !u!4 &689956127 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 183264236110826051, guid: 8b857ebee4acb434093fe486feb2a66c,
+    type: 3}
+  m_PrefabInstance: {fileID: 689956126}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &689956128 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7225871999911396309, guid: 8b857ebee4acb434093fe486feb2a66c,
+    type: 3}
+  m_PrefabInstance: {fileID: 689956126}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &689956129 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8163433649925417511, guid: 8b857ebee4acb434093fe486feb2a66c,
+    type: 3}
+  m_PrefabInstance: {fileID: 689956126}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &689956130
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 689956128}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.15216011, y: 0.022833169, z: 0.15216011}
+  m_Center: {x: 0.33373773, y: 0.9191078, z: 0.10802111}
+--- !u!114 &689956131
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 689956129}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af7e7d1220c026b468b27d7ad0c4ff62, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bowls: {fileID: 689956129}
+  Base_Pos: {x: -0.02630798, y: 0, z: 0}
+  gimmickSequence: {fileID: 41910433}
+--- !u!114 &689956132
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 689956129}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5f87a91844916f46b1595a62fb95c79, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fragments: {fileID: 5591204967773808552, guid: 19823561d0812a249a535d0edea28c20,
+    type: 3}
+  dropCount:
+    _min: 0
+    _max: 1
+    _current: 0
+    _isMin: 1
+    _isMax: 0
+    isOverMax: 0
+    isOverMin: 0
+  shatterForceRatio: 10
+  shatterYForce: 3
+  gimmickSequence: {fileID: 41910433}
+  gimmickMaterialControl: {fileID: 41910432}
 --- !u!1001 &707146859
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2767,6 +2995,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isOnAwake: 1
   isLoop: 1
+  delayTimer:
+    _min: 0
+    _max: 0
+    _current: 0
+    _isMin: 1
+    _isMax: 1
+    isOverMax: 0
+    isOverMin: 0
   isSequenceStop: 0
   gimmicks:
   - isLoop: 0
@@ -3926,6 +4162,7 @@ Transform:
   - {fileID: 7226318769032746390}
   - {fileID: 1892885975713908851}
   - {fileID: 3464598614092029457}
+  - {fileID: 689956127}
   - {fileID: 3821066730530232152}
   - {fileID: 4430511254295352960}
   - {fileID: 6286564206911662888}
@@ -5289,13 +5526,14 @@ GameObject:
   - component: {fileID: 3512926030413508211}
   - component: {fileID: 5113844869305632621}
   - component: {fileID: 5113844869305632620}
+  - component: {fileID: 5113844869305632622}
   m_Layer: 0
   m_Name: "\uC811\uC2DC_1"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &3816424784298572982
 GameObject:
   m_ObjectHideFlags: 0
@@ -6183,7 +6421,23 @@ MonoBehaviour:
     isOverMin: 0
   shatterForceRatio: 10
   shatterYForce: 3
+  gimmickSequence: {fileID: 0}
   gimmickMaterialControl: {fileID: 41910432}
+--- !u!114 &5113844869305632622
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3745759085012807187}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af7e7d1220c026b468b27d7ad0c4ff62, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bowls: {fileID: 3745759085012807187}
+  Base_Pos: {x: -0.02630798, y: 0, z: 0}
+  gimmickSequence: {fileID: 41910433}
 --- !u!23 &5165624132710415695
 MeshRenderer:
   m_ObjectHideFlags: 0

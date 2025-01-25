@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Xml.Serialization;
+using Cysharp.Threading.Tasks;
 using GamePlay;
 using Gimmick;
 using UnityEngine;
@@ -22,27 +23,26 @@ public class PlateDropGimmick : MonoBehaviour, IInteract
     //위로 얼마나 튀길지
     public float shatterYForce = 3f;
 
+    public GimmickSequence gimmickSequence;
     public GimmickMaterialControl gimmickMaterialControl;
 
     //깨지는 소리
     //public AudioSource audioPlayer;
     //public AudioClip audioClip; //소리를 미리 저장 
 
-    private Rigidbody _rigidbody;
+    private Collider collider;
     private Vector3 initPos;
     private Vector3 originAngle;
     private bool isInteractAble;
 
     public void Awake()
     {
-        _rigidbody = GetComponent<Rigidbody>();
+        collider = GetComponentInChildren<Collider>();
     }
 
     void Start()
     {
-        isInteractAble = false;
-        initPos = transform.localPosition;
-        originAngle = transform.localEulerAngles;
+        Init();
     }
     
     private void OnCollisionEnter(Collision other)
@@ -73,19 +73,15 @@ public class PlateDropGimmick : MonoBehaviour, IInteract
         if (dropCount.IsMax && !isInteractAble)
         {
             if(!gimmickMaterialControl.HasMaterial) gimmickMaterialControl.AddMaterial();
-            
+
+            collider.isTrigger = false;
             isInteractAble = true;
-            _rigidbody.isKinematic = false;
-            _rigidbody.useGravity = true;
-            _rigidbody.AddTorque(Vector3.one);
         }
     }
 
     public void Init()
     {
         gimmickMaterialControl.RemoveMaterial();
-        _rigidbody.isKinematic = true;
-        _rigidbody.useGravity = false;
         ReturnToShelf();
     }
     
@@ -93,9 +89,19 @@ public class PlateDropGimmick : MonoBehaviour, IInteract
     {
         //상호작용 비활성화 
         isInteractAble = false;
+        collider.isTrigger = true;
         //원래 위치로 복귀 
         transform.localPosition = initPos;
         transform.localEulerAngles = originAngle;
+    }
+
+    public void Delay() => DelayTask().Forget();
+
+    private async UniTask DelayTask()
+    {
+        gimmickSequence.isSequenceStop = true;
+        await UniTask.WaitUntil(() => !collider.isTrigger);
+        gimmickSequence.isSequenceStop = false;
     }
 
     public void Interact(InputAction.CallbackContext context)
