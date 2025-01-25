@@ -1,34 +1,26 @@
+using System;
 using System.Threading.Tasks;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Collections;
 using Cysharp.Threading.Tasks;
+using Util;
+using Random = UnityEngine.Random;
 
 public class pre_move : MonoBehaviour
 {
     public float forceAmount = 20f;
-    public float bounceForce = 10f;
-    public int MaxRandomAmount = 10;
-    public int MinRandomAmount = 1;
-
-    private float jumpForceMultiplier = 3.5f; // 점프 힘 감소율
-    private float minJumpForce = 1.0f;  // 최소 점프 힘
-    private float maxJumpForce = 10.0f; // 최대 점프 힘
-    private float currentJumpForce;   // 현재 점프 힘 저장
+    public float rotateForce = 1f;
 
     private Rigidbody rb;
-    public Rigidbody top_rb;
-    public Rigidbody left_rb;
-    public Rigidbody right_rb;
-    public Rigidbody down_rb;
-    public GameObject Bubble;
     public ParticleSystem dieParticle;
 
-    private bool canJump = false; // 점프 가능 상태
-    private bool right = true;
-    private Coroutine jumpCoroutine;
-    private float lastWallHitTime = -1f; // 마지막 벽에 닿은 시간
+    public StatusValue<float> velocityLimit = new(-5, 5);
+    public Rigidbody rbX;
+    public Rigidbody rbXMinus;
+    public Rigidbody rbY;
+    public Rigidbody rbYMinus;
 
     private void Start()
     {
@@ -37,245 +29,83 @@ public class pre_move : MonoBehaviour
         {
             Debug.Log("rb is null");
         }
-        AutoMove().Forget();
-        currentJumpForce = maxJumpForce; // 시작할 때 최대 힘 설정
+        gameObject.transform.localPosition = new Vector3(Random.Range(-1f, 1f), Random.Range(0.45f, 0.75f), gameObject.transform.localPosition.z);
+        gameObject.transform.localEulerAngles = new Vector3(0, 0, Random.Range(0f, 360f));
+        rb.AddTorque(Vector3.forward * rotateForce);
+
+        var collider = gameObject.GetComponent<Collider>();
+        Physics.IgnoreCollision(collider, rbX.GetComponent<Collider>(), true);
+        Physics.IgnoreCollision(collider, rbXMinus.GetComponent<Collider>(), true);
+        Physics.IgnoreCollision(collider, rbY.GetComponent<Collider>(), true);
+        Physics.IgnoreCollision(collider, rbYMinus.GetComponent<Collider>(), true);
     }
 
     private void Update()
     {
-        int randomValue = Random.Range(0, 2);
-        int rv = Random.Range(MinRandomAmount, MaxRandomAmount);
-
-        if (Input.GetKeyDown(KeyCode.J))
-        {
-            ApplyInitialForce();
-        }
-
-        if (canJump && Keyboard.current.spaceKey.wasPressedThisFrame)
-        {
-            ApplyJumpForce();
-        }
-
-        if (Keyboard.current.spaceKey.wasPressedThisFrame && !canJump)
-        {
-            Debug.Log("점프 불가 상태");
-        }
-
-        Vector3 force = new Vector3(1, 1, 0);
-        if (force.x > 5)
-        {
-            force.x = 5;
-        }
-        else if (force.x < -5)
-        {
-            force.x = -5;
-        }
-        else if (force.y > 5)
-        {
-            force.y = 5;
-        }
-
-        float currentHeight = transform.position.y;
-
-        // if (Keyboard.current.wKey.wasPressedThisFrame && top_rb != null)
-        // {
-        //     Bubble_Addforce(new Vector3(0, 1, 0));
-        // }
-        // else if (Keyboard.current.aKey.wasPressedThisFrame && top_rb != null)
-        // {
-        //     Bubble_Addforce(new Vector3(-1, 0, 0));
-        // }
-        // else if (Keyboard.current.sKey.wasPressedThisFrame && top_rb != null)
-        // {
-        //     Bubble_Addforce(new Vector3(0, -1, 0));
-        // }
-        // else if (Keyboard.current.dKey.wasPressedThisFrame && top_rb != null)
-        // {
-        //     Bubble_Addforce(new Vector3(1, 0, 0));
-        // }
+        AutoMove(transform.right * Random.Range(0.7f,1.3f));
     }
 
-    void ApplyInitialForce()
+    public void OnCollisionEnter(Collision other)
     {
-        if (right == true)
+        CalReflection(other);
+        void CalReflection(Collision other)
         {
-            Bubble_Addforce(new Vector3(0.5f, 1, 0)); // 위로가는 힘 적용
-        }
-        else
-        {
-            Bubble_Addforce(new Vector3(-0.5f, 1, 0));
+            // 충돌 지점과 법선 벡터 가져오기 (첫 번째 접촉점 기준)
+            ContactPoint contact = other.contacts[0];
+            Vector3 normal = contact.normal; // 충돌 면의 법선 벡터
+
+            // 입사 벡터 계산 (현재 속도)
+            Vector3 incomingVelocity = rb.velocity;
+
+            // 반사 벡터 계산
+            Vector3 reflectedVelocity = Vector3.Reflect(incomingVelocity, normal);
+
+            // 회전 축 계산: 입사 벡터와 반사 벡터의 외적 (법선 벡터에 수직)
+            Vector3 rotationAxis = Vector3.Cross(incomingVelocity, reflectedVelocity).normalized;
+
+            // 회전 속도 계산: 반사 벡터의 크기와 회전 속도 조정값에 따라 설정
+            float angularSpeed = reflectedVelocity.magnitude * Random.Range(0.8f, 1.2f);
+
+            // Rigidbody의 angularVelocity 설정
+            rb.angularVelocity = rotationAxis * angularSpeed;
         }
     }
 
-    public Vector2[] Spot = { new Vector2(1f, 0.4f), new Vector2(0.8f, 0.4f), new Vector2(0.4f, 0.4f), new Vector2(0.6f, 0.4f) };
-
-    async UniTask AutoMove()
+    public void OnCollisionStay(Collision other)
     {
-        for(int i = 0; i < 100; i++)
+        if (Mathf.Abs(rb.angularVelocity.magnitude) < 0.01f)
         {
-            int randomValue = Random.Range(0, 4);
-            auto_Addforce(Spot[randomValue]);
-
-            Debug.Log(Spot[randomValue] +"ss  "+ (Vector2)gameObject.transform.localPosition);
-            await UniTask.Delay(2000);
+            gameObject.transform.Rotate(new Vector3(0,0,90));
+            rb.AddTorque(Vector3.forward * rotateForce);
+        }
+        
+        if ((LayerMask.GetMask("Bubble Attacker") & (1 << other.gameObject.layer)) != 0)
+        {
+            dieParticle.gameObject.SetActive(true);
+            dieParticle.transform.position = transform.position;
+            dieParticle.Play();
+            Destroy(gameObject);
+            Debug.Log("버블 사망");
+            return;
         }
     }
-
-    private bool isGrounded = false; // 바닥에 닿았는지 여부
-
-    /*
-private void OnTriggerEnter(Collider collision)
-{
-    if ((LayerMask.GetMask("Bubble Attacker") & (1 << collision.gameObject.layer)) != 0)
+    void AutoMove(Vector2 dir)
     {
-        dieParticle.gameObject.SetActive(true);
-        dieParticle.transform.position = transform.position;
-        dieParticle.Play();
-        Destroy(gameObject);
-        Debug.Log("버블 사망");
+        rbX.AddForce((dir.x > 0 ? 1f : 1.2f) * forceAmount * dir);
+        rbXMinus.AddForce( (dir.x < 0 ? 1f : 1.2f) * forceAmount * dir);
+        rbY.AddForce((dir.y > 0 ? 1f : 1.2f) * forceAmount * dir);
+        rbYMinus.AddForce((dir.y < 0 ? 1f : 1.2f) * forceAmount * dir);
+        
+        LimitRBVel(rbX);
+        LimitRBVel(rbXMinus);
+        LimitRBVel(rbY);
+        LimitRBVel(rbYMinus);
         return;
-    }
-    
-    if (collision.gameObject.CompareTag("Plane") && !isGrounded)
-    {
-        isGrounded = true; // 바닥에 닿음
-        Debug.Log("닿았음");
-        currentJumpForce *= jumpForceMultiplier;
-        currentJumpForce = Mathf.Clamp(currentJumpForce, minJumpForce, maxJumpForce);
 
-        Bubble_Addforce(new Vector3(0, currentJumpForce, 0));
-        Debug.Log($"적용된 점프 힘: {currentJumpForce}");
-
-        if (jumpCoroutine != null)
+        void LimitRBVel(Rigidbody rbVel)
         {
-            StopCoroutine(jumpCoroutine);
-        }
-        jumpCoroutine = StartCoroutine(EnableJumpForLimitedTime());
-    }
-
-    if (collision.gameObject.CompareTag("Wall"))
-    {
-        Debug.Log("벽 닿았음");
-        
-        // 벽에 닿은 후 3초가 지나면 반전
-        if (Time.time - lastWallHitTime > 3f)
-        {
-            right = !right;
-            lastWallHitTime = Time.time; // 마지막 벽에 닿은 시간 갱신
-            Debug.Log("반전 완료");
-        }
-    }
-}*/
-
-
-
-    private void OnTriggerExit(Collider collision)
-    {
-        if (collision.gameObject.CompareTag("Plane"))
-        {
-            isGrounded = false; // 바닥에서 벗어남
-        }
-    }
-
-    private IEnumerator EnableJumpForLimitedTime()
-    {
-        canJump = true;
-        yield return new WaitForSeconds(0.05f); // 50ms
-        canJump = false;
-    }
-
-    void ApplyJumpForce()
-    {
-        Vector3 jumpDirection = right ? new Vector3(1, 1, 0) : new Vector3(-1, 1, 0);
-        rb.AddForce(jumpDirection * forceAmount, ForceMode.Impulse);
-    }
-
-    void auto_Addforce(Vector2 dir)
-    {
-        int Select_Sub = Random.Range(0, 2);
-        int Sub_Value = Random.Range(MinRandomAmount, MaxRandomAmount);
-        float Dir_X = dir.x - gameObject.transform.localPosition.x;
-        float Dir_Y = dir.y - gameObject.transform.localPosition.y;
-
-        
-        if (Dir_Y > 0)
-        {
-            top_rb.AddForce(new Vector3(0, 0.3f, 0) , ForceMode.Impulse);
-            if (Select_Sub == 1)
-                left_rb.AddForce(new Vector3(0, 0.3f, 0) , ForceMode.Impulse);
-            else
-                right_rb.AddForce(new Vector3(0, 0.3f, 0), ForceMode.Impulse);
-        }
-        else
-        {
-            top_rb.AddForce(new Vector3(0, -0.2f, 0), ForceMode.Impulse);
-            if (Select_Sub == 1)
-                left_rb.AddForce(new Vector3(0, -0.2f, 0), ForceMode.Impulse);
-            else
-                right_rb.AddForce(new Vector3(0, -0.2f, 0), ForceMode.Impulse);
-        }
-
-
-        if (Dir_X < 0)
-        {
-            left_rb.AddForce(new Vector3(-0.4f, 0, 0), ForceMode.Impulse);
-
-            if (Select_Sub == 1)
-                top_rb.AddForce(new Vector3(-0.4f, 0, 0) , ForceMode.Impulse);
-            else
-                down_rb.AddForce(new Vector3(-0.4f, 0, 0) , ForceMode.Impulse);
-        }
-        else if (Dir_X > 0)
-        {
-            right_rb.AddForce(new Vector3(0.4f, 0, 0) , ForceMode.Impulse);
-            if (Select_Sub == 1)
-                top_rb.AddForce(new Vector3(0.4f, 0, 0) , ForceMode.Impulse);
-            else
-                down_rb.AddForce(new Vector3(0.4f, 0, 0) , ForceMode.Impulse);
-        }
-    }
-    void Bubble_Addforce(Vector3 dir)
-    {
-        int Select_Sub = Random.Range(0, 2);
-        int Sub_Value = Random.Range(MinRandomAmount, MaxRandomAmount);
-        float Dir_X = dir.x;
-        float Dir_Y = dir.y;
-
-       
-
-        if (Dir_Y > 0)
-        {
-            top_rb.AddForce(new Vector3(0, 1, 0), ForceMode.Impulse);
-            if (Select_Sub == 1)
-                left_rb.AddForce(new Vector3(0, 1, 0) * Sub_Value, ForceMode.Impulse);
-            else
-                right_rb.AddForce(new Vector3(0, 1, 0), ForceMode.Impulse);
-        }
-        else if (Dir_Y < 0)
-        {
-            down_rb.AddForce(new Vector3(0, -1, 0), ForceMode.Impulse);
-            if (Select_Sub == 1)
-                left_rb.AddForce(new Vector3(0, -1, 0), ForceMode.Impulse);
-            else
-                right_rb.AddForce(new Vector3(0, -1, 0), ForceMode.Impulse);
-        }
-
-        if (Dir_X < 0)
-        {
-            left_rb.AddForce(new Vector3(-1, 0, 0) * forceAmount, ForceMode.Impulse);
-
-            if (Select_Sub == 1)
-                top_rb.AddForce(new Vector3(-1, 0, 0) * Sub_Value, ForceMode.Impulse);
-            else
-                down_rb.AddForce(new Vector3(-1, 0, 0) * Sub_Value, ForceMode.Impulse);
-        }
-        else if (Dir_X > 0)
-        {
-            right_rb.AddForce(new Vector3(1, 0, 0) * forceAmount, ForceMode.Impulse);
-            if (Select_Sub == 1)
-                top_rb.AddForce(new Vector3(1, 0, 0) * Sub_Value, ForceMode.Impulse);
-            else
-                down_rb.AddForce(new Vector3(1, 0, 0) * Sub_Value, ForceMode.Impulse);
+            float clampedSpeed = Mathf.Clamp(rbVel.velocity.magnitude, velocityLimit.Min,velocityLimit.Max);
+            rbVel.velocity = rbVel.velocity.normalized * clampedSpeed;
         }
     }
 }
