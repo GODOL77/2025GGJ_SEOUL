@@ -211,7 +211,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 314457992}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: -0.58778286, w: -0.8090188}
   m_LocalPosition: {x: 0.1194, y: 0.4056, z: 0.1468}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -296,7 +296,7 @@ MonoBehaviour:
       isOverMin: 0
     rateTimer:
       _min: 0
-      _max: 2
+      _max: 1
       _current: 0
       _isMin: 0
       _isMax: 0
@@ -579,12 +579,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   faucetObject: {fileID: 314457992}
-  faucetRotateCount:
+  faucetRotateTime:
     _min: 0
-    _max: 3
+    _max: 10
     _current: 0
-    _isMin: 0
-    _isMax: 1
+    _isMin: 1
+    _isMax: 0
+    isOverMax: 0
+    isOverMin: 0
+  faucetRotateAmount:
+    _min: 0
+    _max: 720
+    _current: 0
+    _isMin: 1
+    _isMax: 0
     isOverMax: 0
     isOverMin: 0
   pool:
@@ -595,6 +603,7 @@ MonoBehaviour:
     _isMax: 0
     isOverMax: 0
     isOverMin: 0
+  dragPower: 3
   gimmickSequence: {fileID: 675898485}
   gimmickMaterialControl: {fileID: 675898484}
 --- !u!54 &1734033679
@@ -870,7 +879,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetObjects:
   - {fileID: 3745759085326368603}
-  material: {fileID: 2100000, guid: 00a094835a6962147bf0bc537fded43e, type: 2}
+  material: {fileID: 2100000, guid: 776132c3edfb45f45be235c501f729c0, type: 2}
 --- !u!114 &1936063150
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2384,7 +2393,6 @@ GameObject:
   - component: {fileID: 8610475757398541082}
   - component: {fileID: 6402729819749806337}
   - component: {fileID: 6478671826413352184}
-  - component: {fileID: 8610475757398541083}
   m_Layer: 0
   m_Name: "\uC218\uB3C4.001"
   m_TagString: Untagged
@@ -2454,9 +2462,9 @@ GameObject:
   - component: {fileID: 3821066729772140048}
   - component: {fileID: 5113844867370980899}
   - component: {fileID: 3512926030169227067}
+  - component: {fileID: 5113844867370980900}
   - component: {fileID: 5113844867370980902}
   - component: {fileID: 5113844867370980901}
-  - component: {fileID: 5113844867370980900}
   m_Layer: 0
   m_Name: "\uC811\uC2DC_1"
   m_TagString: Untagged
@@ -3188,6 +3196,7 @@ MonoBehaviour:
     isOverMin: 0
   shatterForceRatio: 10
   shatterYForce: 3
+  gimmickMaterialControl: {fileID: 1936063149}
 --- !u!54 &5113844867370980901
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3196,9 +3205,9 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3745759085326368603}
   serializedVersion: 4
-  m_Mass: 1
+  m_Mass: 0.01
   m_Drag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 1
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -4757,7 +4766,6 @@ GameObject:
   - component: {fileID: 4230354775661643324}
   - component: {fileID: 1830461625036737691}
   - component: {fileID: 302778972395363989}
-  - component: {fileID: 8365022469932956443}
   m_Layer: 0
   m_Name: "\uC218\uB3C4"
   m_TagString: Untagged
@@ -4765,27 +4773,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!65 &8365022469932956443
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8365022469932956442}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.03131614, y: 0.0719651, z: 0.0620031}
-  m_Center: {x: 0.1209283, y: 0.4056194, z: 0.10894777}
 --- !u!23 &8420612954223178328
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -4922,27 +4909,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1734033677}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &8610475757398541083
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3566981386055356330}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.08010971, y: 0.13024706, z: 0.09118129}
-  m_Center: {x: 0.14975795, y: 0.5047164, z: 0.12886283}
 --- !u!4 &8683187308576132061
 Transform:
   m_ObjectHideFlags: 0
