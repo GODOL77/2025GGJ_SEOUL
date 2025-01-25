@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Xml.Serialization;
+using GamePlay;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
-public class PlateDropGimmick : MonoBehaviour
+public class PlateDropGimmick : MonoBehaviour, IInteract
 {
     //파편 에셋 
     public GameObject fragments;
@@ -25,30 +27,19 @@ public class PlateDropGimmick : MonoBehaviour
         isInteractAble = false;
         initPos = transform.position;
     }
-    void Update()
-    {
-        if(isInteractAble)
-        {
-
-            if(Input.GetMouseButtonDown(0))
-            {
-                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-                if(Physics.Raycast(ray, out RaycastHit hit))
-                {
-                    if(hit.collider.gameObject.name == gameObject.name)
-                    {
-                        ReturnToShelf();
-                    }
-                }
-            }
-        }
-    }
+    
     public void Play()
     {
         //예비 동작: 흔들흔들 하면서 앞으로 살살 기어간다. 
         //결국 선반에서 떨어지면서 자유낙하
         
     }
+
+    public void Init()
+    {
+        
+    }
+    
     private void OnCollisionExit(Collision other) 
     {
         if(other.gameObject.tag == "Shelf")
@@ -85,4 +76,18 @@ public class PlateDropGimmick : MonoBehaviour
         transform.position = initPos;
     }
 
+    public void Interact(InputAction.CallbackContext context)
+    {
+        if(isInteractAble && context.performed)
+        {
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            if(Physics.Raycast(ray, out RaycastHit hit))
+            {
+                if(hit.collider.gameObject.name == gameObject.name)
+                {
+                    ReturnToShelf();
+                }
+            }
+        }
+    }
 }

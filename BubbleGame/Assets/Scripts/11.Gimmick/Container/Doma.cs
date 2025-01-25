@@ -17,32 +17,13 @@ public class Doma : MonoBehaviour, IInteract
     public Vector3 BaseVegetablePos;
     private Vector3 Click_MousePos;
 
-
-
-
     private void Awake()
     {
 
         BaseVegetablePos = vegetable.transform.position;
         //StartPattern(5f).Forget();
     }
-
-    async UniTask StartPattern(float duration)
-    {
-        isPattern = true;
-        /* ¾ßÃ¤¸¦ »ý¼º ¾Ö´Ï¸ÞÀÌ¼Ç
-            
-        */
-        await UniTask.Delay((int)(duration * 1000));
-        if(isPattern) 
-            Debug.Log("ÆÐÅÏ ½ÇÇà");
-        else
-            Debug.Log("ÆÐÅÏ ÇØÁ¦");
-
-    }
-
-
-
+    
     private bool Check_Click()
     {
         Ray ray = Camera.main.ScreenPointToRay(InputManager.MousePosition);
@@ -64,11 +45,10 @@ public class Doma : MonoBehaviour, IInteract
 
     async UniTask drag()
     {
-        //Debug.Log("µå·¡±×");
         while (isClick)
         {
-            Vector3 screenPosition = InputManager.MousePosition; // ¸¶¿ì½º È­¸é ÁÂÇ¥
-            screenPosition.z = Camera.main.WorldToScreenPoint(vegetable.transform.position).z; // ¾ßÃ¤ÀÇ ¿ùµå Z °ª
+            Vector3 screenPosition = InputManager.MousePosition; // ï¿½ï¿½ï¿½ì½º È­ï¿½ï¿½ ï¿½ï¿½Ç¥
+            screenPosition.z = Camera.main.WorldToScreenPoint(vegetable.transform.position).z; // ï¿½ï¿½Ã¤ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Z ï¿½ï¿½
             Vector3 worldPosition = Camera.main.ScreenToWorldPoint(screenPosition);
             //vegetable.transform.position = worldPosition;
             vegetable.transform.position = Vector3.Lerp(
@@ -76,16 +56,12 @@ public class Doma : MonoBehaviour, IInteract
             await UniTask.Yield();
         }
 
-        //Debug.Log("µå·¡±× Á¾·á");
         if (Check_DragOut())
         {
-            Vector3 screenPosition = InputManager.MousePosition; // ¸¶¿ì½º È­¸é ÁÂÇ¥
-            screenPosition.z = Camera.main.WorldToScreenPoint(vegetable.transform.position).z; // ¾ßÃ¤ÀÇ ¿ùµå Z °ª
+            Vector3 screenPosition = InputManager.MousePosition; // ï¿½ï¿½ï¿½ì½º È­ï¿½ï¿½ ï¿½ï¿½Ç¥
+            screenPosition.z = Camera.main.WorldToScreenPoint(vegetable.transform.position).z; // ï¿½ï¿½Ã¤ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Z ï¿½ï¿½
             Vector3 worldPosition = Camera.main.ScreenToWorldPoint(screenPosition);
             
-            /*
-             * ¾ßÃ¤ ¹ö¸®´Â ¾Ö´Ï¸ÞÀÌ¼Ç
-            */
             vegetable.transform.DOMove(worldPosition, 1f);
             vegetable.transform.DORotate(new Vector3(0, 0 , 180f), 1f, RotateMode.LocalAxisAdd);
             isPattern = false;
@@ -100,7 +76,6 @@ public class Doma : MonoBehaviour, IInteract
         {
             if (Check_Click() && isClick == false)
             {
-                Debug.Log("¾ßÃ¤ Å¬¸¯");
                 isClick = true;
                 Click_MousePos = InputManager.MousePosition;
                 drag().Forget();
