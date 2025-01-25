@@ -1,4 +1,5 @@
-﻿using UnityEngine.Events;
+﻿using System;
+using UnityEngine.Events;
 using Util;
 
 namespace Gimmick
@@ -11,5 +12,6 @@ namespace Gimmick
         public StatusValue<float> rateTimer = new();
         public UnityEvent action;
         public UnityEvent delay;
+        public Func<bool> onDelayTask;
     }
 }

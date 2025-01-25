@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using Util;
+using UnityEngine.SceneManagement;
 
 public class OptionButton : Singleton<OptionButton>
 {
@@ -14,23 +15,49 @@ public class OptionButton : Singleton<OptionButton>
     }
     public void OnPressButton()
     {
-        if(isOptionPanelActive)
-        {
-            HideOptionPanel();
-        }
-        else
+        if(!isOptionPanelActive)
         {
             ShowOptionPanel();
+            PauseGame();
         }
     }
     void ShowOptionPanel()
     {
-        optionPanel.SetActive(true);
         isOptionPanelActive = true;
+        optionPanel.SetActive(true);   
     }
     void HideOptionPanel()
     {
-        optionPanel.SetActive(false);
         isOptionPanelActive = false;
+        optionPanel.SetActive(false);
     }
+    
+    void PauseGame()
+    {
+        Time.timeScale = 0f;
+    }
+    void ResumeGame()
+    {
+        Time.timeScale = 1f;
+    }
+    
+    public void RestartGame()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        HideOptionPanel();
+        ResumeGame();
+    }
+    public void ReturnLobby()
+    {
+        SceneManager.LoadScene("Lobby");
+        HideOptionPanel();
+        ResumeGame();
+    }
+    public void Back()
+    {
+        HideOptionPanel();
+        ResumeGame();
+
+    }
+
 }
