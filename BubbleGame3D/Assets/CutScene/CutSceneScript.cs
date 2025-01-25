@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using UnityEngine.SceneManagement;
+
 public class CutSceneScript : MonoBehaviour
 {
     // Start is called before the first frame update
@@ -11,7 +13,6 @@ public class CutSceneScript : MonoBehaviour
 
     public void ScenceLoad()
     {
-        //씬로드 코드
-        Debug.Log("로드");
+        SceneManager.LoadScene("Game");
     }
 }
