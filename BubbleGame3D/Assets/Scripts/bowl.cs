@@ -13,14 +13,16 @@ public class bowl : MonoBehaviour
 
     private void Start()
     {
-        //init_bowl();
+        init_bowl();
         shake_bowl();
     }
     public void init_bowl()
     {
         BowlSeq.Kill();
-        gameObject.transform.position = Base_Pos;
-        gameObject.transform.rotation = Quaternion.EulerRotation(new Vector3(0,0,-4));
+        Debug.Log(Base_Pos);
+        gameObject.transform.DOMove(Base_Pos, 0.1f);
+       // gameObject.transform.position = Base_Pos;
+        //gameObject.transform.rotation = Quaternion.EulerRotation(new Vector3(0,0,-4));
     }
 
     public void shake_bowl()
