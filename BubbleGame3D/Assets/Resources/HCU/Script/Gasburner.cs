@@ -4,7 +4,9 @@ using UnityEngine;
 public class Gasburner : MonoBehaviour
 {
     [SerializeField] private ParticleSystem Tick;
+    [SerializeField] private AudioSource tickSound;
     [SerializeField] private ParticleSystem Fire;
+    [SerializeField] private AudioSource fireSound;
     [SerializeField] private Collider Collider;
     [SerializeField] private float MinTickTime;
     [SerializeField] private float MaxTickTime;
@@ -64,10 +66,12 @@ public class Gasburner : MonoBehaviour
             currentTick++;
             Debug.Log("Tick");
             Tick.Play();
+            tickSound.Play();
         }
 
         Debug.Log("Fire");
         Fire.Play();
+        fireSound.Play();
         isBurn = true;
         Collider.enabled = true;
         SetActiveTick(false);

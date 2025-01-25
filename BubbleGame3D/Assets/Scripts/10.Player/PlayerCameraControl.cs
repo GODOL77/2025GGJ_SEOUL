@@ -11,7 +11,7 @@ namespace Player
         public float moveDuration = 0.3f; // 카메라 움직임에 걸리는 시간
         public Transform[] moveTransform;
 
-        private StatusValue<int> _moveTransformCount = new(0, 0, 2);
+        private StatusValue<int> _moveTransformCount = new(1, 0, 2);
         private Vector3 _movePosition;
         private Tween _moveTween;
 

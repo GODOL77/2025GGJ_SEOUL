@@ -75,7 +75,7 @@ public class bowl : MonoBehaviour, IInteract
 
     public void Interact(InputAction.CallbackContext context)
     {
-        if (!IsShakeEnd && context.performed)
+        if (IsShakeEnd && context.performed)
         {
             Init_bowl();
         }

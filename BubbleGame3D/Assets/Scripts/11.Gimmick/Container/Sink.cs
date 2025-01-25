@@ -22,6 +22,7 @@ namespace Gimmick.Container
         public StatusValue<float> pool = new(0, 0, 1);
         public ParticleSystem waterParticle;
         public Transform waterTransform;
+        public AudioSource waterAudio;
         // 싱크대 안에 있는 물이 찰 곳 
         // 0 : Start, 1 : End
         public Transform[] waterFillTransforms;
@@ -40,11 +41,13 @@ namespace Gimmick.Container
 
         private void Awake()
         {
+            waterParticle.gameObject.SetActive(false);
             Init();
         }
 
         public void Init()
         {
+            waterParticle.gameObject.SetActive(false);
             waterTransform.position = waterFillTransforms[0].position;
             isFaucetOn = false;
             pool.SetMin();
@@ -68,12 +71,14 @@ namespace Gimmick.Container
             _activeFaucetCancelToken = new();
             
             waterParticle.Stop();
-            gimmickMaterialControl.RemoveMaterial();
+            waterAudio.Stop();
         }
 
         private async UniTask ActiveFaucet(CancellationToken token)
         {
+            waterParticle.gameObject.SetActive(true);
             waterParticle.Play();
+            waterAudio.Play();
             while (!token.IsCancellationRequested)
             {
                 await UniTask.WaitForEndOfFrame();
@@ -83,6 +88,7 @@ namespace Gimmick.Container
                 if (pool.IsMax)
                 {
                     faucetRotateTime.SetMin();
+                    gimmickMaterialControl.RemoveMaterial();
                     break;
                 }
             }
@@ -92,6 +98,7 @@ namespace Gimmick.Container
         private async UniTask RotateTask(CancellationToken token)
         {
             waterParticle.Stop();
+            waterAudio.Stop();
             while (!token.IsCancellationRequested)
             {
                 await UniTask.WaitForFixedUpdate();
@@ -163,7 +170,7 @@ namespace Gimmick.Container
                 _activeFaucetCancelToken.Cancel();
                 _activeFaucetCancelToken.Dispose();
                 _activeFaucetCancelToken = new();
-                
+                waterAudio.Stop();
                 DragTask(_dragCancelToken.Token).Forget();
                 isDrag = true;
             }
