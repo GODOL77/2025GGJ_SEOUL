@@ -19,33 +19,20 @@ public class Doma : MonoBehaviour, IInteract
 
     private void Awake()
     {
-
         BaseVegetablePos = vegetable.transform.position;
         //StartPattern(5f).Forget();
     }
-    
-    private bool Check_Click()
-    {
-        Ray ray = Camera.main.ScreenPointToRay(InputManager.MousePosition);
-        RaycastHit hit;
-
-        if (Physics.Raycast(ray, out hit))
-        {
-            if (hit.transform.gameObject == vegetable) 
-                return true;
-        }
-        return false;
-    }
-
+     
     private bool Check_DragOut()
     {
         float dis = Vector3.Distance(Click_MousePos, InputManager.MousePosition);
-        return dis > 500f;
+        return dis > 300f;
     }
+
 
     async UniTask drag()
     {
-        while (isClick)
+        while (isClick && Mouse.current.leftButton.isPressed)
         {
             Vector3 screenPosition = InputManager.MousePosition; // ���콺 ȭ�� ��ǥ
             screenPosition.z = Camera.main.WorldToScreenPoint(vegetable.transform.position).z; // ��ä�� ���� Z ��
@@ -62,8 +49,16 @@ public class Doma : MonoBehaviour, IInteract
             screenPosition.z = Camera.main.WorldToScreenPoint(vegetable.transform.position).z; // ��ä�� ���� Z ��
             Vector3 worldPosition = Camera.main.ScreenToWorldPoint(screenPosition);
             
-            vegetable.transform.DOMove(worldPosition, 1f);
-            vegetable.transform.DORotate(new Vector3(0, 0 , 180f), 1f, RotateMode.LocalAxisAdd);
+            vegetable.transform.DOLocalMove(worldPosition, 0.5f);
+            vegetable.transform.DOLocalRotate(new Vector3(540f, 0 , 0), 2f, RotateMode.LocalAxisAdd);
+
+            if(InputManager.MousePosition.x < BaseVegetablePos.x)
+                vegetable.transform.DOLocalMoveX(0.8f, 0.5f).SetEase(Ease.InQuad).SetDelay(0.4f);
+            else
+                vegetable.transform.DOLocalMoveX(-0.8f, 0.5f).SetEase(Ease.InQuad).SetDelay(0.4f);
+
+            vegetable.transform.DOLocalMoveZ(-0.5f, 0.5f).SetEase(Ease.InQuad).SetDelay(0.4f);
+            vegetable.transform.DOLocalMoveY(-0.5f, 0.5f).SetEase(Ease.InQuad).SetDelay(0.4f);
             isPattern = false;
         }
         else
@@ -74,15 +69,15 @@ public class Doma : MonoBehaviour, IInteract
     {
         if (context.performed)
         {
-            if (Check_Click() && isClick == false)
-            {
-                isClick = true;
-                Click_MousePos = InputManager.MousePosition;
-                drag().Forget();
-            }
+            Debug.Log("클릭");
+            isClick = true;
+            Click_MousePos = InputManager.MousePosition;
+            drag().Forget();
         }
+
         if (context.canceled)
         {
+            Debug.Log("클릭 취소");
             isClick = false;
         }
     }
