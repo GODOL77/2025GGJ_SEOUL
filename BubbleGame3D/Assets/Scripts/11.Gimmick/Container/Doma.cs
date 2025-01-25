@@ -88,11 +88,11 @@ public class Doma : MonoBehaviour, IInteract
             Vector3 screenPosition = InputManager.MousePosition; // ���콺 ȭ�� ��ǥ
             screenPosition.z = Camera.main.WorldToScreenPoint(vegetable.transform.position).z; // ��ä�� ���� Z ��
             Vector3 worldPosition = Camera.main.ScreenToWorldPoint(screenPosition);
-            
-            vegetable.transform.DOLocalMove(worldPosition, 0.5f);
-            vegetable.transform.DOLocalRotate(new Vector3(540f, 0 , 0), 2f, RotateMode.LocalAxisAdd);
 
-            if(vegetable.transform.position.x < worldPosition.x)
+            vegetable.transform.DOLocalMove(worldPosition, 0.5f);
+            vegetable.transform.DOLocalRotate(new Vector3(540f, 0, 0), 2f, RotateMode.LocalAxisAdd);
+
+            if (vegetable.transform.position.x < worldPosition.x)
                 vegetable.transform.DOLocalMoveX(0.8f, 0.5f).SetEase(Ease.InQuad).SetDelay(0.4f);
             else
                 vegetable.transform.DOLocalMoveX(-0.8f, 0.5f).SetEase(Ease.InQuad).SetDelay(0.4f);
@@ -101,11 +101,11 @@ public class Doma : MonoBehaviour, IInteract
             vegetable.transform.DOLocalMoveY(-0.5f, 0.5f).SetEase(Ease.InQuad).SetDelay(0.4f);
             IsComplete = true;
             isPattern = false;
-            
+
             gimmickSequence.Init();
         }
         else
-            vegetable.transform.position = BaseVegetablePos;
+            Init();
     }
 
     public void Interact(InputAction.CallbackContext context)
