@@ -1,6 +1,8 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
+using Util;
 
 namespace Gimmick
 {
@@ -8,6 +10,7 @@ namespace Gimmick
     {
         public bool isOnAwake = false;
         public bool isLoop = false;
+        public StatusValue<float> delayTimer = new(0,0);
         [HideInInspector] public bool isSequenceStop = false;
         public GimmickAction[] gimmicks;
         
@@ -26,6 +29,11 @@ namespace Gimmick
 
         public void Update()
         {
+            if (!delayTimer.IsMax)
+            {
+                delayTimer.Current += Time.deltaTime;
+                return;
+            }
             if(isSequenceStop) return;
             
             _currentGimmick.rateTimer.Current -= Time.deltaTime;
@@ -33,6 +41,7 @@ namespace Gimmick
             {
                 _currentGimmick.action.Invoke();
                 _currentGimmick.delay.Invoke();
+                // DelayTask().Forget();
                 _currentGimmick.rateTimer.SetMax();
                 _currentGimmick.loopCount.Current++;
                 if (!_currentGimmick.isLoop && _currentGimmick.loopCount.IsMax)
@@ -50,6 +59,8 @@ namespace Gimmick
 
         public void Init()
         {
+            delayTimer.SetMin();
+            
             _currentGimmickEnumerator = gimmicks.GetEnumerator();
             if(_currentGimmickEnumerator.MoveNext())
                 _currentGimmick = _currentGimmickEnumerator.Current as GimmickAction;
@@ -62,6 +73,22 @@ namespace Gimmick
         }
         public void Play() => isSequenceStop = false;
         public void Stop() => isSequenceStop = true;
+
+        public async UniTask DelayTask()
+        {
+            isSequenceStop = true;
+            var gimmick = _currentGimmick;
+            await UniTask.WaitUntil(() =>
+            {
+                if (gimmick.onDelayTask == null) return true;
+                foreach (var del in gimmick.onDelayTask.GetInvocationList())
+                {
+                    if (!((Func<bool>)del).Invoke()) return false;
+                }
+                return true;
+            });
+            isSequenceStop = false;
+        }
         
         /// <summary>
         /// 적절한 애니메이션이 아니면 Sequence 중단

@@ -38,6 +38,11 @@ namespace Gimmick.Container
         private CancellationTokenSource _faucetRotateCancelToken = new();
         private CancellationTokenSource _dragCancelToken = new();
 
+        private void Awake()
+        {
+            Init();
+        }
+
         public void Init()
         {
             waterTransform.position = waterFillTransforms[0].position;
@@ -75,7 +80,11 @@ namespace Gimmick.Container
                 pool.Current += Time.deltaTime;
                 waterTransform.position = Vector3.Lerp(waterFillTransforms[0].position, waterFillTransforms[1].position, pool.Current / pool.Max);
 
-                if (pool.IsMax) break;
+                if (pool.IsMax)
+                {
+                    faucetRotateTime.SetMin();
+                    break;
+                }
             }
             Stop();
         }
@@ -117,12 +126,14 @@ namespace Gimmick.Container
                 Ray ray = Camera.main.ScreenPointToRay(InputManager.MousePosition);
                 RaycastHit hit;
 
+                Debug.Log(InputManager.MouseDrag);
+                
                 if (isDrag && Physics.Raycast(ray, out hit, float.MaxValue) &&
                     hit.transform.gameObject == gameObject)
                 {
-                    if (InputManager.MouseDrag.x < 0f)
+                    if ((Mathf.Abs(InputManager.MouseDrag.x) > 0f || Mathf.Abs(InputManager.MouseDrag.y) > 0f))
                     {
-                        faucetRotateTime.Current += InputManager.MouseDrag.x * dragPower * Time.fixedDeltaTime * Time.timeScale;
+                        faucetRotateTime.Current +=  -dragPower * Time.fixedDeltaTime * Time.timeScale;
                         faucetRotateAmount.Current = faucetRotateAmount.Max / faucetRotateTime.Max * faucetRotateTime.Current;
                         var angle = faucetObject.transform.localEulerAngles;
                         angle.z = faucetRotateAmount.Current;
@@ -131,6 +142,8 @@ namespace Gimmick.Container
                 }
                 else
                     break;
+
+                if (faucetRotateTime.IsMin) break;
             }
             
             if(!faucetRotateAmount.IsMin) RotateTask(_faucetRotateCancelToken.Token).Forget();
