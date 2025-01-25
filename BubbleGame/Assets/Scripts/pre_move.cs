@@ -2,6 +2,7 @@ using System.Threading.Tasks;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using System.Collections;
 public class pre_move : MonoBehaviour
 {
     
@@ -16,9 +17,8 @@ public class pre_move : MonoBehaviour
     public Rigidbody right_rb;
     public Rigidbody down_rb;
 
-    private bool isPlaneHit = false;
-    private bool isWallHit = false;
-    private bool canJump = false;
+    private bool canJump = false; // 점프 가능 상태
+    private Coroutine jumpCoroutine;
 
     private void Start()
     {
@@ -36,17 +36,14 @@ public class pre_move : MonoBehaviour
         int randomValue = Random.Range(0, 2);
         int rv = Random.Range(MinRandomAmount, MaxRandomAmount);
 
-    if (Input.GetKeyDown(KeyCode.J))
+    if (Input.GetKeyDown(KeyCode.J))    // 임시 디버깅용 코드
     {
         ApplyInitialForce();
     }
 
-    if (canJump == true)
+    if (canJump && Keyboard.current.spaceKey.wasPressedThisFrame)
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            ApplyInitialForce();
-        }
+        ApplyJumpForce();
     }
 
         // if (Keyboard.current.wKey.wasPressedThisFrame && top_rb != null)
@@ -70,47 +67,48 @@ public class pre_move : MonoBehaviour
     void ApplyInitialForce()
     {
         {
-            Bubble_Addforce(new Vector3(0, 1, 0)); // 위로가는 힘 적용
-            Bubble_Addforce(new Vector3(1, 0, 0)); // 앞으로 가는 힘 적용
+            Bubble_Addforce(new Vector3(1, 1, 0)); // 위로가는 힘 적용
         }
     }
 
-    async Task CheckPlaneHit()
+    private void OnCollisionEnter(Collision collision)
     {
-        if (isPlaneHit == true)
+        if (collision.gameObject.CompareTag("Plane"))
         {
-            canJump = true;
-            await Task.Delay(50);   // 50ms 대기
-            Debug.Log("50ms 대기했음");
-            canJump = false;
-            isPlaneHit = false;
+            Debug.Log("닿았음");
+            if (jumpCoroutine != null)
+            {
+                StopCoroutine(jumpCoroutine);
+            }
+            jumpCoroutine = StartCoroutine(EnableJumpForLimitedTime());
         }
     }
 
-    void OnTriggerEnter(Collider other)
+    private IEnumerator EnableJumpForLimitedTime()
     {
-        Debug.Log("OnTriggerEnter 인식됨");
-        if (other.gameObject.CompareTag("Plane"))
-        {
-            Debug.Log("방울이 바닥에 닿음");
-            isPlaneHit = true;
-            rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z); // 수직 속도 초기화
-            rb.AddForce(Vector3.up * bounceForce, ForceMode.Impulse); // 위로 튕기는 힘 추가
-        }
-
-        if (other.gameObject.CompareTag("Wall"))
-        {
-            isWallHit = true;
-        }
+        canJump = true;
+        yield return new WaitForSeconds(0.05f); // 50ms(0.05초)
+        canJump = false;
     }
 
-    void CheckHitWall()
+    private void ApplyJumpForce()
     {
-        if (isWallHit == true)
-        {
-
-        }
+        rb.AddForce(new Vector3(1, 1, 0) * forceAmount, ForceMode.Impulse);
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     void Bubble_Addforce(Vector3 dir)
     {
