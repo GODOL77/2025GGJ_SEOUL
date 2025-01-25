@@ -4432,6 +4432,9 @@ MonoBehaviour:
     _isMax: 0
     isOverMax: 0
     isOverMin: 0
+  waterParticle: {fileID: 0}
+  waterTransform: {fileID: 0}
+  waterFillTransforms: []
   dragPower: 3
   gimmickSequence: {fileID: 1628810939}
   gimmickMaterialControl: {fileID: 1628810938}
@@ -6046,17 +6049,17 @@ PrefabInstance:
     - target: {fileID: 7310155297430642836, guid: 9040f19d5178fae45a0d892c28712160,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.695
+      value: 0.447
       objectReference: {fileID: 0}
     - target: {fileID: 7310155297430642836, guid: 9040f19d5178fae45a0d892c28712160,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.817
+      value: 0.634
       objectReference: {fileID: 0}
     - target: {fileID: 7310155297430642836, guid: 9040f19d5178fae45a0d892c28712160,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.167
+      value: 0.178
       objectReference: {fileID: 0}
     - target: {fileID: 7378422762428123417, guid: 9040f19d5178fae45a0d892c28712160,
         type: 3}
@@ -7967,6 +7970,9 @@ MonoBehaviour:
     _isMax: 0
     isOverMax: 0
     isOverMin: 0
+  waterParticle: {fileID: 0}
+  waterTransform: {fileID: 0}
+  waterFillTransforms: []
   dragPower: 3
   gimmickSequence: {fileID: 1628810939}
   gimmickMaterialControl: {fileID: 1628810938}
