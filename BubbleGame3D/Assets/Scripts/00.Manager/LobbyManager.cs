@@ -1,5 +1,6 @@
 ﻿using GamePlay;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Manager
 {
@@ -7,7 +8,7 @@ namespace Manager
     {
         public void StartGame()
         {
-            SceneUtil.GoGameScene();
+            SceneManager.LoadScene("Intro");
         }
 
         public void ExitGame()
@@ -18,6 +19,11 @@ namespace Manager
             #else
             Application.Quit(); // 어플리케이션 종료
             #endif
+        }
+
+        public void NextGame()
+        {
+            SceneManager.LoadScene("Game");
         }
     }
 }
