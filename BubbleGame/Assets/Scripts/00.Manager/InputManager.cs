@@ -13,6 +13,8 @@ public class InputManager : Singleton<InputManager>
     
     public static Vector2 MousePosition => Mouse.current.position.value;
 
+    public static InputAction Interact => Instance.input.PlayerAction.Interact;
+
     private PlayerInputSystem input;
     public void Awake()
     {
