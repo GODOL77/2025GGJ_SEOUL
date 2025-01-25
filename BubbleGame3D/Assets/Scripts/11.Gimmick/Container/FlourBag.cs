@@ -2,21 +2,17 @@ using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using GamePlay;
 using Gimmick;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using Util;
 
 public class FlourBag : MonoBehaviour, IInteract
 {
     public GimmickSequence gimmickSequence;
-    public ParticleSystem smokeParticle;
-
+    public GimmickMaterialControl gimmickMaterialControl;
+    
     Sequence MilSeq;
     Sequence downSequence;
 
-    public StatusValue<float> smokeInvokeTimer = new(0, 0, 1.5f);
     public bool isEnd;
 
     private Vector3 Base_Pos;
@@ -35,6 +31,7 @@ public class FlourBag : MonoBehaviour, IInteract
     public void init_mil()
     {
         isEnd = true;
+        gimmickMaterialControl.RemoveMaterial();
         downSequence.Kill();
         transform.localPosition = Base_Pos;
         transform.localRotation = Quaternion.identity;
@@ -48,6 +45,7 @@ public class FlourBag : MonoBehaviour, IInteract
         MilSeq.Join(transform.DOLocalRotate(new Vector3(40, 0, 0f), 4f).SetRelative(true).SetEase(Ease.OutQuad));
         MilSeq.OnComplete(() =>
         {
+            if(!gimmickMaterialControl.HasMaterial) gimmickMaterialControl.AddMaterial();
             downSequence = DOTween.Sequence();
             downSequence.Append(transform.DOLocalMove(new Vector3(0, -1.2f, 0.5f), 3f).SetRelative(true).SetEase(Ease.InSine));
             downSequence.Join(transform.DOLocalRotate(new Vector3(145, 0, 0f), 2f).SetRelative(true).SetEase(Ease.InSine));
@@ -68,6 +66,7 @@ public class FlourBag : MonoBehaviour, IInteract
         if (context.performed)
         {
             init_mil();
+            gimmickSequence.Init();
         }
     }
 }

@@ -11,16 +11,16 @@ public class VolumeScrollbar : MonoBehaviour
     public void MasterVol()
     {   
         float logValue = Mathf.Lerp(-80f, 0f, scrollbar.value);
-        SoundManager.Instance.SetVolume("Master", logValue);
+        SoundManager.SetVolume("Master", logValue);
     }
     public void BGMVol()
     {   
         float logValue = Mathf.Lerp(-80f, 0f, scrollbar.value);
-        SoundManager.Instance.SetVolume("BGM", logValue);
+        SoundManager.SetVolume("BGM", logValue);
     }
     public void EffectVol()
     {   
         float logValue = Mathf.Lerp(-80f, 0f, scrollbar.value);
-        SoundManager.Instance.SetVolume("Effect", logValue);
+        SoundManager.SetVolume("Effect", logValue);
     }
 }

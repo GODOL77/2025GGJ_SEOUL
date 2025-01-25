@@ -1,12 +1,8 @@
 using Cysharp.Threading.Tasks;
-using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using DG.Tweening;
-using System.Linq.Expressions;
 using GamePlay;
-using System.Runtime.InteropServices;
 using System.Threading;
 using Gimmick;
 
@@ -19,6 +15,7 @@ public class Doma : MonoBehaviour, IInteract
     public GimmickSequence gimmickSequence;
     public GimmickMaterialControl gimmickMaterialControl;
     public ParticleSystem VegetableSlayer;
+    public Collider attackCollider;
 
     public GameObject vegetable;
     private Vector3 BaseVegetablePos;
@@ -30,6 +27,7 @@ public class Doma : MonoBehaviour, IInteract
     {
         BaseVegetablePos = vegetable.transform.localPosition;
         gameObject.SetActive(false);
+        attackCollider.gameObject.SetActive(false);
     }
 
     public void Init()
@@ -60,12 +58,10 @@ public class Doma : MonoBehaviour, IInteract
     private async UniTask PlayParticleTwice()
     {
         gimmickSequence.isSequenceStop = true;
-        for (int i = 0; i < 2; i++) // 2번 반복
-        {
-            VegetableSlayer.Play(); // 파티클 시스템 재생
-            await UniTask.Delay((int)((VegetableSlayer.main.duration + VegetableSlayer.main.startLifetime.constantMax) * 1000));
-            // 파티클 재생 완료 후 대기
-        }
+        VegetableSlayer.Play(); // 파티클 시스템 재생
+        attackCollider.gameObject.SetActive(true);
+        await UniTask.Delay((int)((VegetableSlayer.main.duration + VegetableSlayer.main.startLifetime.constantMax) * 1000));
+        attackCollider.gameObject.SetActive(false);
         gimmickSequence.isSequenceStop = false;
     }
 
@@ -105,6 +101,8 @@ public class Doma : MonoBehaviour, IInteract
             vegetable.transform.DOLocalMoveY(-0.5f, 0.5f).SetEase(Ease.InQuad).SetDelay(0.4f);
             IsComplete = true;
             isPattern = false;
+            
+            gimmickSequence.Init();
         }
         else
             vegetable.transform.position = BaseVegetablePos;
