@@ -1,32 +1,39 @@
 ﻿using System.Linq;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Gimmick
 {
     public class GimmickMaterialControl : MonoBehaviour
     {
-        public GameObject targetObject;
+        public GameObject[] targetObjects;
         public Material material;
         
         public void AddMaterial()
         {
-            if (ReferenceEquals(targetObject, null)) return;
-            if (targetObject.TryGetComponent(out MeshRenderer meshRenderer))
+            if (ReferenceEquals(targetObjects, null)) return;
+            foreach (var obj in targetObjects)
             {
-                var mats = meshRenderer.sharedMaterials.ToList();
-                mats.Add(material);
-                meshRenderer.SetMaterials(mats);
+                if (obj.TryGetComponent(out MeshRenderer meshRenderer))
+                {
+                    var mats = meshRenderer.sharedMaterials.ToList();
+                    mats.Add(material);
+                    meshRenderer.SetMaterials(mats);
+                }
             }
         }
 
         public void RemoveMaterial()
         {
-            if (ReferenceEquals(targetObject, null)) return;
-            if (targetObject.TryGetComponent(out MeshRenderer meshRenderer))
+            if (ReferenceEquals(targetObjects, null)) return;
+            foreach (var obj in targetObjects)
             {
-                var mats = meshRenderer.sharedMaterials.ToList();
-                mats.Remove(material);
-                meshRenderer.SetMaterials(mats);
+                if (obj.TryGetComponent(out MeshRenderer meshRenderer))
+                {
+                    var mats = meshRenderer.sharedMaterials.ToList();
+                    mats.Remove(material);
+                    meshRenderer.SetMaterials(mats);
+                }
             }
         }
     }
