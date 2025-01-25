@@ -57,7 +57,6 @@ public class OptionButton : Singleton<OptionButton>
     {
         HideOptionPanel();
         ResumeGame();
-
     }
 
 }
