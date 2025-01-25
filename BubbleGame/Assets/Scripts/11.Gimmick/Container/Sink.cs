@@ -18,12 +18,20 @@ namespace Gimmick.Container
         // 싱크대 안에 물이 얼마나 찼는지
         public StatusValue<float> pool = new(0, 0, 1);
 
+        public GimmickSequence gimmickSequence;
+        // 활성화 되었을때 아웃라인 추가하는 용도
+        public GimmickMaterialControl gimmickMaterialControl;
+
         private bool isFaucetOn = false; // 수도꼭지가 틀어져 있는지
         private CancellationTokenSource _cancelToken = new();
         private Tween faucetRotateTween;
 
+        // 기믹이 동작 조건을 만족해 동작중인지
+        public bool IsGimmickActive => faucetRotateCount.IsMax;
+
         public void Init()
         {
+            isFaucetOn = false;
             faucetRotateCount.SetMin();
             pool.SetMin();
 
@@ -32,13 +40,20 @@ namespace Gimmick.Container
         
         public void Play()
         {
-            if(faucetRotateCount.IsMax)
-                ActiveFaucet(_cancelToken.Token).Forget();
-            else
+            if (faucetRotateCount.IsMin)
             {
-                faucetRotateCount.Current++;
-                if (faucetRotateTween != null) faucetRotateTween.Pause();
-                faucetRotateTween = faucetObject.transform.DORotate(new Vector3(0, 0, (360f / faucetRotateCount.Max) * faucetRotateCount.Current), 0.4f);
+                gimmickMaterialControl.AddMaterial();
+            }
+
+            faucetRotateCount.Current++;
+            if (faucetRotateTween != null) faucetRotateTween.Pause();
+            faucetRotateTween = faucetObject.transform.DORotate(new Vector3(0, 0, (360f / faucetRotateCount.Max) * faucetRotateCount.Current), 0.4f);
+            
+            if (faucetRotateCount.IsMax)
+            {
+                isFaucetOn = true;
+                gimmickSequence.Stop();
+                ActiveFaucet(_cancelToken.Token).Forget();
             }
         }
 
@@ -46,6 +61,8 @@ namespace Gimmick.Container
         {
             _cancelToken.Cancel();
             _cancelToken.Dispose();
+            
+            gimmickMaterialControl.RemoveMaterial();
         }
 
         private async UniTask ActiveFaucet(CancellationToken token)
@@ -54,7 +71,17 @@ namespace Gimmick.Container
             {
                 await UniTask.WaitForEndOfFrame();
                 pool.Current += Time.deltaTime;
+                
+                if(pool.IsMax) Stop();
             }
+        }
+
+        public void GimmickDelay() => GimmickDelayTask().Forget();
+        private async UniTask GimmickDelayTask()
+        {
+            gimmickSequence.isSequenceStop = true;
+            await UniTask.WaitUntil(() => !faucetRotateCount.IsMax || pool.IsMax);
+            gimmickSequence.isSequenceStop = false;
         }
 
         public void Interact(InputAction.CallbackContext context)

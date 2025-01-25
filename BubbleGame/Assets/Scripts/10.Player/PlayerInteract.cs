@@ -16,17 +16,14 @@ namespace Player
 
         public void ClickEvent(InputAction.CallbackContext context)
         {
-                Ray ray = Camera.main.ScreenPointToRay(InputManager.MousePosition);
-                RaycastHit hit;
+            Ray ray = Camera.main.ScreenPointToRay(InputManager.MousePosition);
+            RaycastHit hit;
 
-                if (Physics.Raycast(ray, out hit) &&
-                    hit.transform.gameObject.TryGetComponent(out IInteract interact))
-                {
-                    interact.Interact(context);
-                }
+            if (Physics.Raycast(ray, out hit) &&
+                hit.transform.gameObject.TryGetComponent(out IInteract interact))
+            {
+                interact.Interact(context);
+            }
         }
-
-
-
     }
 }

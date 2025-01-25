@@ -8,13 +8,13 @@ namespace Gimmick
     {
         public bool isOnAwake = false;
         public bool isLoop = false;
+        [HideInInspector] public bool isSequenceStop = false;
         public GimmickAction[] gimmicks;
         
         [SerializeField] private GimmickAction _currentGimmick;
         private IEnumerator _currentGimmickEnumerator;
 
         private Animator animator;
-        private bool isSequenceStop = false;
 
         public void Awake()
         {

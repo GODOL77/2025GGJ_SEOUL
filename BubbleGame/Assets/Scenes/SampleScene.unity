@@ -208,6 +208,7 @@ GameObject:
   m_Component:
   - component: {fileID: 168320670}
   - component: {fileID: 168320671}
+  - component: {fileID: 168320672}
   m_Layer: 0
   m_Name: GameObject
   m_TagString: Untagged
@@ -244,6 +245,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isOnAwake: 1
   isLoop: 1
+  isSequenceStop: 0
   gimmicks:
   - isLoop: 0
     loopCount:
@@ -279,7 +281,19 @@ MonoBehaviour:
           m_CallState: 2
     delay:
       m_PersistentCalls:
-        m_Calls: []
+        m_Calls:
+        - m_Target: {fileID: 1820414688}
+          m_TargetAssemblyTypeName: Gimmick.Container.Sink, Assembly-CSharp
+          m_MethodName: GimmickDelay
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
   _currentGimmick:
     isLoop: 0
     loopCount:
@@ -304,6 +318,20 @@ MonoBehaviour:
     delay:
       m_PersistentCalls:
         m_Calls: []
+--- !u!114 &168320672
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 168320669}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 544510ab89ad85d49a528492487183bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetObject: {fileID: 1820414687}
+  material: {fileID: 2100000, guid: 00a094835a6962147bf0bc537fded43e, type: 2}
 --- !u!1 &177254851
 GameObject:
   m_ObjectHideFlags: 0
@@ -1108,6 +1136,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isOnAwake: 0
   isLoop: 0
+  isSequenceStop: 0
   gimmicks:
   - isLoop: 0
     loopCount:
@@ -1406,10 +1435,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 336f3087ddc7f334faceeba8cfba57c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  faucetObject: {fileID: 0}
+  faucetObject: {fileID: 1820414687}
   faucetRotateCount:
     _min: 0
-    _max: 3
+    _max: 2
     _current: 0
     _isMin: 0
     _isMax: 1
@@ -1417,12 +1446,14 @@ MonoBehaviour:
     isOverMin: 0
   pool:
     _min: 0
-    _max: 1
+    _max: 2
     _current: 0
     _isMin: 1
     _isMax: 0
     isOverMax: 0
     isOverMin: 0
+  gimmickSequence: {fileID: 168320671}
+  gimmickMaterialControl: {fileID: 168320672}
 --- !u!65 &1820414689
 BoxCollider:
   m_ObjectHideFlags: 0
