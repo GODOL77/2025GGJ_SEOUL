@@ -8,7 +8,6 @@ public class ScreenResolutionManager : MonoBehaviour
     void Start()
     {
         Screen.SetResolution(960, 1080, true);
-        DontDestroyOnLoad(gameObject);
     }
 
     // Update is called once per frame

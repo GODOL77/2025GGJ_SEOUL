@@ -17,6 +17,7 @@ public class PlateDropGimmick : MonoBehaviour, IInteract
 
     public GimmickSequence gimmickSequence;
     public GimmickMaterialControl gimmickMaterialControl;
+    public AudioSource shatterSound;
 
     //깨지는 소리
     //public AudioSource audioPlayer;
@@ -37,6 +38,9 @@ public class PlateDropGimmick : MonoBehaviour, IInteract
     
     private void OnCollisionEnter(Collision other)
     {
+        if(!isInteractAble) return;
+        
+        shatterSound.Play();
         //부서진다.
         for(int i=0; i<3; i++)
         {

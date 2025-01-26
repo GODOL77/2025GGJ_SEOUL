@@ -15,6 +15,7 @@ public class Doma : MonoBehaviour, IInteract
     public GimmickSequence gimmickSequence;
     public GimmickMaterialControl gimmickMaterialControl;
     public ParticleSystem VegetableSlayer;
+    public AudioSource slashSound;
     public Collider attackCollider;
 
     public GameObject vegetable;
@@ -59,6 +60,7 @@ public class Doma : MonoBehaviour, IInteract
     {
         gimmickSequence.isSequenceStop = true;
         VegetableSlayer.Play(); // 파티클 시스템 재생
+        slashSound.Play();
         attackCollider.gameObject.SetActive(true);
         await UniTask.Delay((int)((VegetableSlayer.main.duration + VegetableSlayer.main.startLifetime.constantMax) * 1000));
         attackCollider.gameObject.SetActive(false);

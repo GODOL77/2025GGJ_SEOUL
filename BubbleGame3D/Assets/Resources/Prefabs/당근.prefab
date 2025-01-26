@@ -100,6 +100,7 @@ MonoBehaviour:
   gimmickSequence: {fileID: 0}
   gimmickMaterialControl: {fileID: 0}
   VegetableSlayer: {fileID: 4490851154786261578}
+  slashSound: {fileID: 567149430777739448}
   attackCollider: {fileID: 1574367180593283800}
   vegetable: {fileID: 3588902955559569406}
   IsComplete: 0
@@ -5233,11 +5234,22 @@ PrefabInstance:
       propertyPath: startDelay.scalar
       value: 0.6
       objectReference: {fileID: 0}
+    - target: {fileID: 8795516736240412944, guid: b9c842e248558f241ade8407e7e3f693,
+        type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 7748177b03415ce478d18517a79eafbe, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b9c842e248558f241ade8407e7e3f693, type: 3}
+--- !u!82 &567149430777739448 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 8795516736240412944, guid: b9c842e248558f241ade8407e7e3f693,
+    type: 3}
+  m_PrefabInstance: {fileID: 9066054711807742376}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &7873637984718638408 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1195090790911827168, guid: b9c842e248558f241ade8407e7e3f693,

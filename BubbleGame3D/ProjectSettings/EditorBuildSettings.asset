@@ -14,7 +14,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Intro.unity
     guid: 1c95def956d0fd54ab7112aa2b60fe09
-  - enabled: 0
-    path: Assets/Scenes/CameraZoomTest.unity
-    guid: ee4669ca4c5e88a49b5bc6b26598aa20
+  - enabled: 1
+    path: Assets/Scenes/EndScene.unity
+    guid: 3e10cab25fd66d74a89c7b14b7913259
+  - enabled: 1
+    path: Assets/Scenes/Die.unity
+    guid: e34eb1da9ccfea6458db95f8c42bdc86
   m_configObjects: {}

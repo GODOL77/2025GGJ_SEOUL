@@ -198,7 +198,7 @@ MonoBehaviour:
   Fire: {fileID: 2591393338481996510}
   fireSound: {fileID: 4621311668454128686}
   Collider: {fileID: 5570468737971574679}
-  MinTickTime: 1
+  MinTickTime: 6
   MaxTickTime: 15
   FireTickAmount: 3
   PatterRateModifier: 0.1
@@ -796,8 +796,8 @@ MonoBehaviour:
   Fire: {fileID: 9147468224327889655}
   fireSound: {fileID: 2100398277045763079}
   Collider: {fileID: 2852651165388124342}
-  MinTickTime: 1
-  MaxTickTime: 15
+  MinTickTime: 7
+  MaxTickTime: 9
   FireTickAmount: 3
   PatterRateModifier: 0.1
 --- !u!1 &7210937757841631015
@@ -851,8 +851,8 @@ MonoBehaviour:
   Fire: {fileID: 942597813509096319}
   fireSound: {fileID: 7980536109691964815}
   Collider: {fileID: 588898898037853344}
-  MinTickTime: 1
-  MaxTickTime: 15
+  MinTickTime: 3
+  MaxTickTime: 30
   FireTickAmount: 3
   PatterRateModifier: 0.1
 --- !u!1001 &1897348273473460376

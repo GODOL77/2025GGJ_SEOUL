@@ -1,19 +1,37 @@
 ﻿using System;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.Events;
+using Util;
 
 namespace Manager
 {
-    public class GameManager : MonoBehaviour
+    public partial class GameManager : Singleton<GameManager>
     {
         public AudioSource bgmSound;
         public AudioClip easyBGMClip;
         public AudioClip hardBGMClip;
         public float soundChangeDuration = 300f;
 
+        public UnityEvent playerDieAction;
+
+        public float playTime = 0f;
+        public bool isGameEnd = false;
+
+        public void Awake()
+        {
+            playerDieAction.AddListener(() => isGameEnd = true);
+        }
+
         public void Start()
         {
             OnBGMSound().Forget();
+        }
+
+        public void Update()
+        {
+            if(isGameEnd) return;
+            playTime += Time.deltaTime;
         }
 
         public async UniTask OnBGMSound()
