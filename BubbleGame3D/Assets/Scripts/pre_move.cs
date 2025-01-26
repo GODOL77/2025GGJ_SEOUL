@@ -4,6 +4,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Collections;
+using System.Threading;
 using Cysharp.Threading.Tasks;
 using Manager;
 using Util;
@@ -22,6 +23,8 @@ public class pre_move : MonoBehaviour
     public Rigidbody rbXMinus;
     public Rigidbody rbY;
     public Rigidbody rbYMinus;
+
+    private CancellationTokenSource rotateCancelToken = new();
 
     private void Start()
     {
@@ -89,7 +92,10 @@ public class pre_move : MonoBehaviour
     {
         if (Mathf.Abs(rb.angularVelocity.magnitude) < 0.001f)
         {
-            RotateTask().Forget();
+            rotateCancelToken.Cancel();
+            rotateCancelToken.Dispose();
+            rotateCancelToken = new();
+            RotateTask(rotateCancelToken.Token).Forget();
             rb.AddTorque(Vector3.forward * rotateForce);
             float clampedSpeed = Mathf.Clamp(rb.angularVelocity.magnitude, -rotateForce, rotateForce);
             rb.angularVelocity = rb.angularVelocity.normalized * clampedSpeed;
@@ -115,10 +121,10 @@ public class pre_move : MonoBehaviour
         }
     }
 
-    async UniTask RotateTask()
+    async UniTask RotateTask(CancellationToken token)
     {
         float t = 0f;
-        while (t < 1f)
+        while (t < 1f && !token.IsCancellationRequested)
         {
             await UniTask.Yield();
             t = Time.deltaTime;
