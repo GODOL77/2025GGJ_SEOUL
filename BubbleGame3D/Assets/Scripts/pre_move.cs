@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Collections;
 using Cysharp.Threading.Tasks;
+using UnityEngine.Experimental.GlobalIllumination;
+using System.Collections.Generic;
 
 public class pre_move : MonoBehaviour
 {
@@ -107,7 +109,8 @@ public class pre_move : MonoBehaviour
         }
     }
 
-    public Vector2[] Spot = { new Vector2(1f, 0.4f), new Vector2(0.8f, 0.4f), new Vector2(0.4f, 0.4f), new Vector2(0.6f, 0.4f) };
+    public List<Vector2> Spot = new List<Vector2>();
+
 
     async UniTask AutoMove()
     {
@@ -117,13 +120,13 @@ public class pre_move : MonoBehaviour
             auto_Addforce(Spot[randomValue]);
 
             Debug.Log(Spot[randomValue] +"ss  "+ (Vector2)gameObject.transform.localPosition);
-            await UniTask.Delay(2000);
+            await UniTask.Delay(1500);
         }
     }
 
     private bool isGrounded = false; // 바닥에 닿았는지 여부
 
-    /*
+    
 private void OnTriggerEnter(Collider collision)
 {
     if ((LayerMask.GetMask("Bubble Attacker") & (1 << collision.gameObject.layer)) != 0)
@@ -135,7 +138,7 @@ private void OnTriggerEnter(Collider collision)
         Debug.Log("버블 사망");
         return;
     }
-    
+    /*
     if (collision.gameObject.CompareTag("Plane") && !isGrounded)
     {
         isGrounded = true; // 바닥에 닿음
@@ -151,8 +154,9 @@ private void OnTriggerEnter(Collider collision)
             StopCoroutine(jumpCoroutine);
         }
         jumpCoroutine = StartCoroutine(EnableJumpForLimitedTime());
-    }
+    }*/
 
+    /*
     if (collision.gameObject.CompareTag("Wall"))
     {
         Debug.Log("벽 닿았음");
@@ -164,8 +168,8 @@ private void OnTriggerEnter(Collider collision)
             lastWallHitTime = Time.time; // 마지막 벽에 닿은 시간 갱신
             Debug.Log("반전 완료");
         }
-    }
-}*/
+    }*/
+}
 
 
 
@@ -208,11 +212,11 @@ private void OnTriggerEnter(Collider collision)
         }
         else
         {
-            top_rb.AddForce(new Vector3(0, -0.2f, 0), ForceMode.Impulse);
+            top_rb.AddForce(new Vector3(0, -0.1f, 0), ForceMode.Impulse);
             if (Select_Sub == 1)
-                left_rb.AddForce(new Vector3(0, -0.2f, 0), ForceMode.Impulse);
+                left_rb.AddForce(new Vector3(0, -0.1f, 0), ForceMode.Impulse);
             else
-                right_rb.AddForce(new Vector3(0, -0.2f, 0), ForceMode.Impulse);
+                right_rb.AddForce(new Vector3(0, -0.1f, 0), ForceMode.Impulse);
         }
 
 
