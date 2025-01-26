@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class Gasburner : MonoBehaviour
 {
+    public GasLever gasLever;
     [SerializeField] private ParticleSystem Tick;
     [SerializeField] private AudioSource tickSound;
     [SerializeField] private ParticleSystem Fire;
@@ -70,6 +71,7 @@ public class Gasburner : MonoBehaviour
         }
 
         Debug.Log("Fire");
+        if(!gasLever.gimmickMaterialControl.HasMaterial) gasLever.gimmickMaterialControl.AddMaterial();
         Fire.Play();
         fireSound.Play();
         isBurn = true;
@@ -80,6 +82,7 @@ public class Gasburner : MonoBehaviour
     public void InteractLever()
     {
         if (!isBurn) return;
+        gasLever.gimmickMaterialControl.RemoveMaterial();
         Fire.Stop();
         isBurn = false;
         currentTick = 0;

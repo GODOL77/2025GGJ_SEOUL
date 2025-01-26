@@ -1,5 +1,6 @@
 ﻿using System;
 using Cysharp.Threading.Tasks;
+using GamePlay;
 using UnityEngine;
 using UnityEngine.Events;
 using Util;
@@ -21,6 +22,7 @@ namespace Manager
         public void Awake()
         {
             playerDieAction.AddListener(() => isGameEnd = true);
+            playerDieAction.AddListener(SceneUtil.AddDieScene);
         }
 
         public void Start()
