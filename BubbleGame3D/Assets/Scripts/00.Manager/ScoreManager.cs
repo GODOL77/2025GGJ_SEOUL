@@ -1,3 +1,4 @@
+using GamePlay;
 using Manager;
 using TMPro;
 using UnityEngine;
@@ -26,7 +27,7 @@ public class ScoreManager : MonoBehaviour
 
         if (score >= 1000)
         {
-            SceneManager.LoadScene("EndScene");
+            SceneUtil.GoEnding();
         }
     }
 }
