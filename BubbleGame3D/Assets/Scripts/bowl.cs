@@ -38,6 +38,7 @@ public class bowl : MonoBehaviour, IInteract
 
     public void Init_bowl()
     {
+        gameObject.SetActive(true);
         downSequence.Kill();
         IsShakeEnd = false;
         gameObject.transform.localPosition = originPosition;
@@ -59,7 +60,7 @@ public class bowl : MonoBehaviour, IInteract
             IsShakeEnd = true;
             downSequence.Append(transform.DOLocalRotate(new Vector3(80, 0, 0), 0.6f).SetRelative(true).SetEase(Ease.OutQuad));
             downSequence.Join(transform.DOLocalMoveZ(0.05f, 0.6f).SetRelative(true).SetEase(Ease.OutQuad));
-            downSequence.Join(transform.DOLocalMoveY(-1f, 1f).SetRelative(true).SetEase(Ease.InQuad));
+            downSequence.Join(transform.DOLocalMoveY(-1f, 2.5f).SetRelative(true).SetEase(Ease.InQuad));
 
             downSequence.OnComplete(Init_bowl);
         });

@@ -17,6 +17,7 @@ public class pre_move : MonoBehaviour
 
     private Rigidbody rb;
     public ParticleSystem dieParticle;
+    public AudioSource dieSound;
 
     public StatusValue<float> velocityLimit = new(-5, 5);
     public Rigidbody rbX;
@@ -57,9 +58,10 @@ public class pre_move : MonoBehaviour
             dieParticle.gameObject.SetActive(true);
             dieParticle.transform.position = transform.position;
             dieParticle.Play();
+            dieSound.Play();
 
             var gameManager = FindObjectOfType<GameManager>();
-            gameManager.playerDieAction?.Invoke();
+            gameManager.InvokePlayerDieAction(2f);
             Destroy(gameObject);
             Debug.Log("버블 사망");
             return;

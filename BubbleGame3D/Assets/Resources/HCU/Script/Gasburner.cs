@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class Gasburner : MonoBehaviour
 {
@@ -8,10 +9,12 @@ public class Gasburner : MonoBehaviour
     [SerializeField] private AudioSource tickSound;
     [SerializeField] private ParticleSystem Fire;
     [SerializeField] private AudioSource fireSound;
+    [SerializeField] private ParticleSystem emergency;
+    
     [SerializeField] private Collider Collider;
     [SerializeField] private float MinTickTime;
     [SerializeField] private float MaxTickTime;
-    [SerializeField] private float FireTickAmount;
+    [SerializeField] private int FireTickAmount;
     [SerializeField] private float PatterRateModifier;
 
     private bool isBurn;
@@ -23,7 +26,7 @@ public class Gasburner : MonoBehaviour
     {
         Tick.Stop();
         Fire.Stop();
-        Collider.enabled = false;
+        Collider.gameObject.SetActive(false);
         isBurn = false;
         currentTick = 0;
         patternRate = 0.0f;
@@ -68,6 +71,12 @@ public class Gasburner : MonoBehaviour
             Debug.Log("Tick");
             Tick.Play();
             tickSound.Play();
+
+            if (FireTickAmount - 1 == currentTick)
+            {
+                if(!gasLever.gimmickMaterialControl.HasMaterial) gasLever.gimmickMaterialControl.AddMaterial();
+                emergency.Play();
+            }
         }
 
         Debug.Log("Fire");
@@ -75,18 +84,30 @@ public class Gasburner : MonoBehaviour
         Fire.Play();
         fireSound.Play();
         isBurn = true;
-        Collider.enabled = true;
+        Collider.gameObject.SetActive(true);
         SetActiveTick(false);
     }
 
     public void InteractLever()
     {
-        if (!isBurn) return;
-        gasLever.gimmickMaterialControl.RemoveMaterial();
-        Fire.Stop();
-        isBurn = false;
-        currentTick = 0;
-        Collider.enabled = false;
-        SetActiveTick(true);
+        if (isBurn)
+        {
+            On();
+        }
+        else if (FireTickAmount - 1 <= currentTick)
+        {
+            On();
+        }
+
+        void On()
+        {
+            gasLever.gimmickMaterialControl.RemoveMaterial();
+            Fire.Stop();
+            emergency.Stop();
+            isBurn = false;
+            currentTick = 0;
+            Collider.gameObject.SetActive(false);
+            SetActiveTick(true);
+        }
     }
 }
