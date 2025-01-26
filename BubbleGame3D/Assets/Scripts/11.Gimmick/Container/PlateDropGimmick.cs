@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using GamePlay;
 using Gimmick;
@@ -29,6 +30,15 @@ public class PlateDropGimmick : MonoBehaviour, IInteract
     public void Awake()
     {
         collider = GetComponentInChildren<Collider>();
+
+        var player = FindObjectOfType<pre_move>();
+        if (player != null && collider != null)
+        {
+            foreach (var c in player.GetComponentsInChildren<Collider>())
+            {
+                Physics.IgnoreCollision(c, collider, true);
+            }
+        }
     }
 
     void Start()
@@ -40,7 +50,9 @@ public class PlateDropGimmick : MonoBehaviour, IInteract
     {
         if(!isInteractAble) return;
         
+        gameObject.SetActive(false);
         shatterSound.Play();
+        List<GameObject> frags = new();
         //부서진다.
         for(int i=0; i<3; i++)
         {
@@ -53,6 +65,20 @@ public class PlateDropGimmick : MonoBehaviour, IInteract
             //파편을 튀긴다. 
             var force = new Vector3(dirNum, shatterYForce, 0f);
             fragEach.GetComponent<Rigidbody>().AddForce(force.normalized * shatterForceRatio);
+            
+            frags.Add(fragEach);
+        }
+
+        for (int i = 0; i < frags.Count; i++)
+        {
+            for (int j = i + 1; j < frags.Count; j++)
+            {
+                if (frags[i].TryGetComponent(out Collider collider1) &&
+                    frags[j].TryGetComponent(out Collider collider2))
+                {
+                    Physics.IgnoreCollision(collider1, collider2, true);
+                }
+            }
         }
         //audioPlayer.PlayOneShot(audioClip);
         Init();

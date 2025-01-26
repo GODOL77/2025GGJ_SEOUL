@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using Cysharp.Threading.Tasks;
+using Manager;
 using UnityEngine;
 using Util;
 
@@ -32,6 +33,7 @@ namespace Gimmick
             if (!delayTimer.IsMax)
             {
                 delayTimer.Current += Time.deltaTime;
+                delayTimer.Max -= Time.deltaTime * 0.1f;
                 return;
             }
             if(isSequenceStop) return;

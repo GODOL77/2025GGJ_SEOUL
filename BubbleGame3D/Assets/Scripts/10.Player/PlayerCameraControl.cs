@@ -2,6 +2,7 @@
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 using Util;
 
 namespace Player
@@ -10,7 +11,9 @@ namespace Player
     {
         public float moveDuration = 0.3f; // 카메라 움직임에 걸리는 시간
         public Transform[] moveTransform;
-
+        public Button leftArrowButton;
+        public Button rightArrowButton;
+        
         private StatusValue<int> _moveTransformCount = new(1, 0, 2);
         private Vector3 _movePosition;
         private Tween _moveTween;
@@ -19,6 +22,10 @@ namespace Player
         {
             InputManager.CameraMoveRight.performed += MoveRight;
             InputManager.CameraMoveLeft.performed += MoveLeft;
+
+            InputAction.CallbackContext c = new();
+            leftArrowButton.onClick.AddListener(() =>MoveLeft(c));
+            rightArrowButton.onClick.AddListener(() => MoveRight(c));
         }
 
         public void OnDestroy()
@@ -44,12 +51,16 @@ namespace Player
         {
             _moveTransformCount.Current--;
             Move(moveTransform[_moveTransformCount.Current].position);
+            leftArrowButton.gameObject.SetActive(_moveTransformCount.Current != 0);
+            rightArrowButton.gameObject.SetActive(_moveTransformCount.Current != 2);
         }
 
         private void MoveRight(InputAction.CallbackContext context)
         {
             _moveTransformCount.Current++;
             Move(moveTransform[_moveTransformCount.Current].position);
+            leftArrowButton.gameObject.SetActive(_moveTransformCount.Current != 0);
+            rightArrowButton.gameObject.SetActive(_moveTransformCount.Current != 2);
         }
     }
 }

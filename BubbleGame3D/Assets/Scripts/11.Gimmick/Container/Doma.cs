@@ -61,8 +61,9 @@ public class Doma : MonoBehaviour, IInteract
         gimmickSequence.isSequenceStop = true;
         VegetableSlayer.Play(); // 파티클 시스템 재생
         slashSound.Play();
+        await UniTask.WaitForSeconds(0.5f);
         attackCollider.gameObject.SetActive(true);
-        await UniTask.Delay((int)((VegetableSlayer.main.duration + VegetableSlayer.main.startLifetime.constantMax) * 1000));
+        await UniTask.WaitForSeconds((VegetableSlayer.main.duration + VegetableSlayer.main.startLifetime.constantMax) - 1f);
         attackCollider.gameObject.SetActive(false);
         gimmickSequence.isSequenceStop = false;
     }

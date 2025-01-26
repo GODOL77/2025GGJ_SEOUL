@@ -87,8 +87,6 @@ namespace Gimmick.Container
 
                 if (pool.IsMax)
                 {
-                    faucetRotateTime.SetMin();
-                    gimmickMaterialControl.RemoveMaterial();
                     break;
                 }
             }
@@ -154,6 +152,8 @@ namespace Gimmick.Container
             if(!faucetRotateAmount.IsMin) RotateTask(_faucetRotateCancelToken.Token).Forget();
             else
             {
+                pool.SetMin();
+                waterTransform.position = waterFillTransforms[0].position;
                 gimmickMaterialControl.RemoveMaterial();
             }
         }
