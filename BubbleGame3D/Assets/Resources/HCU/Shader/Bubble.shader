@@ -46,7 +46,12 @@ Shader "Bubble"
 		
 
 		HLSLINCLUDE
+		#ifdef SHADER_API_WEBGL
+		#pragma target 2.0
+		#else
 		#pragma target 4.5
+		#endif
+		
 		#pragma prefer_hlslcc gles
 		// ensure rendering platforms toggle list is visible
 
